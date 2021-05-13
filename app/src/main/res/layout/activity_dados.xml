@@ -37,8 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-
-
     <ScrollView
         android:visibility="visible"
         android:id="@+id/sv_dados"
@@ -260,21 +258,26 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginHorizontal="32dp"
                     android:text="@string/str_btn_voltar_main"
-                    android:background="@drawable/btn_personal_lightblue"
-                    android:textColor="@android:color/white"
+                    android:fontFamily="@font/roboto"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="match_parent"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/btn_personal_lightblue"
                     android:layout_height="wrap_content"/>
 
                 <Button
-
+                    android:radius="15dp"
                     android:id="@+id/btn_registrar_revisao"
                     android:layout_marginTop="32dp"
                     android:layout_marginHorizontal="32dp"
                     android:text="@string/str_btn_revisao"
+                    android:fontFamily="@font/roboto"
                     android:background="@drawable/btn_personal"
                     android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
+
 
             </TableRow>
 

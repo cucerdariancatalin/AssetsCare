@@ -4,7 +4,14 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorLight">#757565</color>
+    <color name="colorGrayLight">#49493b</color>
     <color name="colorRed50">#FFEBEE</color>
     <color name="colorRed">#D32F2F</color>
+    <color name="colorLightBlue">#2BAFFA</color>
+    <color name="colorGsaBlue">#0E244B</color>
+    <color name="colorTextBox">#FEFDDF</color>
+    <color name="colorBlueLight">#733ae6</color>
+
+    0E44B
 
 </resources>

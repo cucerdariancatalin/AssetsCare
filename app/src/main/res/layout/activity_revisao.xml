@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
@@ -69,8 +70,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:stretchColumns="1">
-
-
 
                 <ImageView
                     android:layout_width="64dp"
@@ -262,6 +261,8 @@
                     android:text="Quantidade"
                     android:textSize="24dp" />
 
+
+
                 <NumberPicker
                     android:id="@+id/number_picker"
                     android:layout_width="wrap_content"
@@ -287,7 +288,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="8dp"
-                    android:background="@android:color/holo_blue_light"
+                    android:background="@color/colorTextBox"
+                    android:fontFamily="@font/roboto"
                     android:hint="Descreva falhas..."
                     android:inputType="text" />
 
@@ -399,6 +401,7 @@
                     android:layout_marginTop="6dp"
                     android:background="@color/colorPrimaryDark"
                     android:focusable="false" />
+
                 <Button
                     android:id="@+id/btn_enviar_os"
                     android:text="@string/str_enviar"
@@ -408,8 +411,6 @@
                     android:textColor="@android:color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-
-
 
             </TableLayout>
         </TableLayout>
