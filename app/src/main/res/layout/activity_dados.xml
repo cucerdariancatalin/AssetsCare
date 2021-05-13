@@ -14,7 +14,6 @@
         android:id="@+id/iv_dados"
         android:src="@drawable/ic_owner"
         android:antialias="true"
-        android:visibility="gone"
         android:layout_gravity="center"
         android:layout_width="128dp"
         android:layout_height="128dp"/>
@@ -255,16 +254,32 @@
         android:background="@color/colorPrimaryDark"
         android:focusable="false" />
 
+            <TableRow>
+                <Button
+                    android:id="@+id/btn_voltar_main"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginHorizontal="32dp"
+                    android:text="@string/str_btn_voltar_main"
+                    android:background="@drawable/btn_personal_lightblue"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <Button
-                android:id="@+id/btn_registrar_revisao"
-                android:layout_marginTop="32dp"
-                android:layout_marginHorizontal="64dp"
-                android:text="@string/str_btn_revisao"
-                android:background="@drawable/btn_personal"
-                android:textColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <Button
+
+                    android:id="@+id/btn_registrar_revisao"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginHorizontal="32dp"
+                    android:text="@string/str_btn_revisao"
+                    android:background="@drawable/btn_personal"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </TableRow>
+
+
+
 
         </TableLayout>
 

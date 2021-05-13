@@ -25,8 +25,8 @@ class RevisaoActivity : AppCompatActivity()
 {
     var date = Calendar.getInstance().time
     var dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-    lateinit var pecaUtilizada: String
-    lateinit var qtdPecasUtilizadas: Number
+    var pecaUtilizada = ""
+    var qtdPecasUtilizadas: Number? = null
     var numOS: String = ""
     var status_os = ""
     var pos_os = ""
