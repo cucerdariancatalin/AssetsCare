@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:padding="64dp"
+        android:src="@drawable/logo_gsa_assets"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"/>
+
+    <com.budiyev.android.codescanner.CodeScannerView
+        android:id="@+id/scanner_view"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:autoFocusButtonColor="@android:color/white"
+        app:autoFocusButtonVisible="true"
+        app:flashButtonColor="@android:color/white"
+        app:flashButtonVisible="true"
+        android:visibility="gone"
+        app:maskColor="#3C000000"/>
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto"
+        android:text="@string/scanner_msg"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        android:textSize="16dp"/>
+
+
+
+    <Button
+        android:id="@+id/btn_scan"
+        android:text="@string/btn_text"
+        android:layout_marginHorizontal="64dp"
+        android:textColor="@android:color/white"
+        android:layout_gravity="top"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:padding="8dp"
+        android:background= "@drawable/btn_personal"
+        />
+
+    <Button
+        android:id="@+id/btn_cancelar"
+        android:text="@string/btn_text_cancelar"
+        android:layout_marginHorizontal="64dp"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:visibility="invisible"
+        android:padding="8dp"
+        android:background="@drawable/btn_personal_red"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+</LinearLayout>

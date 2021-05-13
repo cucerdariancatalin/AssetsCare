@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="48dp"
+    tools:context=".RevisaoActivity">
+
+    <ImageView
+        android:id="@+id/iv_os_enviada"
+        android:layout_marginTop="240dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:src="@drawable/ic_icon_osenviada" />
+
+    <TextView
+        android:id="@+id/tv_os_enviada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="OS ENVIADA!"
+        android:textSize="@android:dimen/app_icon_size" />
+
+    <Button
+        android:id="@+id/btn_voltar"
+        android:text="@string/str_voltar"
+        android:layout_marginTop="48dp"
+        android:layout_marginHorizontal="64dp"
+        android:visibility="gone"
+        android:background="@drawable/btn_personal"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:visibility="visible"
+        android:id="@+id/sv_dados_revisao"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+
+            <ProgressBar
+                android:layout_marginTop="320dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:id="@+id/progress_bar" />
+
+            <TableLayout
+                android:id="@+id/tb_main"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="1">
+
+
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/ic_documentation" />
+
+                <TextView
+                    android:id="@+id/dados_titulo_revisao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:nextFocusLeft="@id/dados_titulo_revisao"
+                    android:nextFocusUp="@id/dados_titulo_revisao"
+                    android:text="ORDEM DE SERVIÇO"
+                    android:textSize="@android:dimen/app_icon_size" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/tv_num_os_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Num. OS: "
+                    android:textSize="24dp"/>
+
+                <TextView
+                    android:id="@+id/tv_num_os"
+                    android:text="0000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="right"
+                    android:textSize="16dp" />
+
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+                <TextView
+                    android:id="@+id/tv_data_os_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Início Manutenção: "
+                    android:textSize="24dp"/>
+
+                <TextView
+                    android:id="@+id/tv_data_os"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="right"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+
+                <TextView
+                    android:text="Número"
+                    android:id="@+id/tv_numero_patrimonio_titulo"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/roboto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="000000"
+                    android:id="@+id/tv_numero_patrimonio"
+                    android:textSize="16dp"
+                    android:gravity="right"
+                    android:fontFamily="@font/roboto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/tv_descricao_loja_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="LOJA"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/tv_loja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="right"
+                    android:text=""
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/tv_descricao_tipo_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="TIPO"
+                    android:textSize="24dp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_tipos_os"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/rd_descricao_tipo1"
+                        android:checked="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="PREVENTIVA"
+                        android:textSize="16dp" />
+                    <Space
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        />
+
+
+                    <RadioButton
+                        android:id="@+id/rd_descricao_tipo2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="CORRETIVA"
+                        android:textSize="16dp" />
+                </RadioGroup>
+
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/tv_descricao_peca_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="PEÇA SUBSTITUÍDA"
+                    android:textSize="24dp" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
+                    android:id="@+id/spinnerPecasSearch"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Quantidade"
+                    android:textSize="24dp" />
+
+                <NumberPicker
+                    android:id="@+id/number_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_marginHorizontal="128dp"
+                    android:layout_height="wrap_content"/>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+
+
+                <TextView
+                    android:id="@+id/tv_descricao_descricao_os_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Detalhes:"
+                    android:textSize="24dp" />
+
+                <EditText
+                    android:id="@+id/et_detalhes"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@android:color/holo_blue_light"
+                    android:hint="Descreva falhas..."
+                    android:inputType="text" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/tv_concluida_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="O.S CONCLUÍDA?"
+                    android:textSize="16dp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_os_status"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:text="SIM"
+                        android:id="@+id/rd_conclusao_sim"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/roboto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                    <Space
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        />
+
+                    <RadioButton
+                        android:text="NÃO"
+                        android:checked="true"
+                        android:id="@+id/rd_conclusao_nao"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/roboto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </RadioGroup>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/tv_pos_conclusao_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:paddingBottom="8dp"
+                    android:text="APÓS MANUTENÇÃO, O EQUIPAMENTO:"
+                    android:textSize="16dp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_pos_os"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:text="ATENDE"
+                        android:id="@+id/rd_atende"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/roboto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="8dp"
+                        />
+
+
+
+                    <RadioButton
+                        android:text="ATENDE COM RESTRIÇÕES"
+                        android:id="@+id/rd_atende_restrito"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/roboto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="8dp"
+                        />
+
+                    <RadioButton
+                        android:text="NÃO ATENDE"
+                        android:id="@+id/rd_nao_atende"
+                        android:checked="true"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/roboto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </RadioGroup>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+                <Button
+                    android:id="@+id/btn_enviar_os"
+                    android:text="@string/str_enviar"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginHorizontal="64dp"
+                    android:background="@drawable/btn_personal"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </TableLayout>
+        </TableLayout>
+    </ScrollView>
+</LinearLayout>

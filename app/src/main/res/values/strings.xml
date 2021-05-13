@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">AssetsCare</string>
+    <string name="scanner_msg">Aponte a câmera para o QRCode</string>
+    <string name="btn_text">Escanear</string>
+    <string name="btn_text2">Cancelar</string>
+    <string name="btn_text_cancelar">cancelar</string>
+    <string name="str_btn_revisao">Registrar Revisão</string>
+    <string name="str_tv_alerta_rede">Houve um problema, verifique a conexão e tente novamente!</string>
+    <string name="str_enviar">Enviar OS</string>
+    <string name="str_voltar">Voltar à Tela Inicial</string>
+    <string name="title_activity_upload_photo">UploadPhoto</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="48dp"
+    tools:context=".DadosActivity">
+
+
+
+    <ImageView
+        android:id="@+id/iv_dados"
+        android:src="@drawable/ic_owner"
+        android:antialias="true"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_width="128dp"
+        android:layout_height="128dp"/>
+
+    <ImageView
+        android:id="@+id/iv_erro_rede"
+        android:src="@drawable/ic_connection_error"
+        android:visibility="gone"
+        android:antialias="true"
+        android:layout_gravity="center"
+        android:layout_width="128dp"
+        android:layout_height="128dp"/>
+    <TextView
+        android:id="@+id/tv_alerta_rede"
+        android:text="@string/str_tv_alerta_rede"
+        android:gravity="center"
+        android:visibility="gone"
+        android:fontFamily="@font/roboto"
+        android:textSize="32dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+    <ScrollView
+        android:visibility="visible"
+        android:id="@+id/sv_dados"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+    <TextView
+        android:text="PATRIMÔNIO"
+        android:gravity="center"
+        android:id="@+id/dados_titulo"
+        android:textSize="@android:dimen/app_icon_size"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:focusable="false" />
+
+            <TextView
+                android:text="Número"
+                android:id="@+id/tv_numero_patrimonio_titulo"
+                android:textSize="24dp"
+                android:fontFamily="@font/roboto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="000000"
+                android:id="@+id/tv_numero_patrimonio"
+                android:textSize="16dp"
+                android:gravity="right"
+                android:fontFamily="@font/roboto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"
+                android:focusable="false" />
+
+    <TextView
+        android:text="Descrição"
+        android:id="@+id/tv_descricao_equipamento_titulo"
+        android:textSize="24dp"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Coletor de Dados"
+        android:id="@+id/tv_descricao_equipamento"
+        android:textSize="16dp"
+        android:gravity="right"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:focusable="false" />
+
+
+            <TextView
+                android:text="FABRICANTE"
+                android:id="@+id/tv_fabricante_titulo"
+                android:textSize="24dp"
+                android:fontFamily="@font/roboto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="NÃO IDENTIFICADO"
+                android:id="@+id/tv_fabricante"
+                android:textSize="16dp"
+                android:gravity="right"
+                android:fontFamily="@font/roboto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"
+                android:focusable="false" />
+
+    <TextView
+        android:text="Data de instalação"
+        android:id="@+id/tv_data_instalacao_titulo"
+        android:textSize="24dp"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="16/11/2020"
+        android:id="@+id/tv_data_instalacao"
+        android:textSize="16dp"
+        android:gravity="right"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:focusable="false" />
+
+    <TextView
+        android:text="Ultima revisão"
+        android:id="@+id/tv_data_revisao_titulo"
+        android:textSize="24dp"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="01/10/2020"
+        android:id="@+id/tv_data_revisao"
+        android:textSize="16dp"
+        android:fontFamily="@font/roboto"
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:focusable="false" />
+
+    <TextView
+        android:text="Responsável"
+        android:id="@+id/tv_responsavel_titulo"
+        android:textSize="24dp"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Fulano de Tal"
+        android:id="@+id/tv_responsavel"
+        android:textSize="16dp"
+        android:gravity="right"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimaryDark"
+                android:focusable="false" />
+
+            <TextView
+                android:text="Localização"
+                android:id="@+id/tv_localizacao_titulo"
+                android:textSize="24dp"
+                android:fontFamily="@font/roboto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:text="LOJA 000"
+                android:id="@+id/tv_localizacao"
+                android:textSize="16dp"
+                android:gravity="right"
+                android:fontFamily="@font/roboto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:focusable="false" />
+
+            <TextView
+                android:text="Custo Manutenção"
+                android:id="@+id/tv_custo_titulo"
+                android:textSize="24dp"
+                android:fontFamily="@font/roboto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="R$ ............."
+                android:id="@+id/tv_custo"
+                android:textSize="16dp"
+                android:gravity="right"
+                android:fontFamily="@font/roboto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"
+        android:focusable="false" />
+
+
+            <Button
+                android:id="@+id/btn_registrar_revisao"
+                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="64dp"
+                android:text="@string/str_btn_revisao"
+                android:background="@drawable/btn_personal"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </TableLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+
+</LinearLayout>
