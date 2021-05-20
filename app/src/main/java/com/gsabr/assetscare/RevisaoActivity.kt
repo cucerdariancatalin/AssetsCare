@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
@@ -40,6 +41,7 @@ class RevisaoActivity : AppCompatActivity()
     val postUrl = "http://192.168.110.239:8080/api_manutencao/api/pre_os"
     val postOsUrl = "http://192.168.110.239:8080/api_manutencao/api/gravaros"
 
+
     //lateinit var patrimonio: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +50,7 @@ class RevisaoActivity : AppCompatActivity()
         setContentView(R.layout.activity_revisao)
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) //Somente retrato
 
-        val patrimonio = intent.getStringExtra("patrimonio")
+        var patrimonio = intent.getStringExtra("patrimonio")
         var localizacao = intent.getStringExtra("localizacao")
         var dataInicioOs = dateTimeFormat.format(date)
         number_picker?.minValue = 0
@@ -60,9 +62,11 @@ class RevisaoActivity : AppCompatActivity()
             //Toast.makeText(this@RevisaoActivity, newVal.toString(), Toast.LENGTH_SHORT).show()
         }
 
+
         tv_data_os.text = dataInicioOs
         tv_loja.text = localizacao
         tv_numero_patrimonio.text = patrimonio
+
 
         objectRequestPecas(urlPecas)
         getNumOs(getOsUrl)
@@ -94,6 +98,8 @@ class RevisaoActivity : AppCompatActivity()
             }else{
                 detalhes = verifyEt
             }
+
+            codFunc = et_codfunc.text.toString()
 
             jsonobj.put("num_os", numOS)
             jsonobj.put("num_patrimonio", patrimonio)
@@ -248,7 +254,7 @@ class RevisaoActivity : AppCompatActivity()
         val que = Volley.newRequestQueue(this@RevisaoActivity)
         val req = JsonObjectRequest(
 
-            Request.Method.POST, postOsUrl, jsonobj, {
+            Request.Method.PUT, postOsUrl, jsonobj, {
 
                 Toast.makeText(applicationContext, "OS enviada!", Toast.LENGTH_SHORT).show()
             },{
@@ -281,6 +287,7 @@ class RevisaoActivity : AppCompatActivity()
             iv_os_enviada.visibility = View.VISIBLE
             tv_os_enviada.visibility = View.VISIBLE
             btn_voltar.visibility = View.VISIBLE
+            tv_os_enviada.text= jsonobj.toString()
         }
     }
 }

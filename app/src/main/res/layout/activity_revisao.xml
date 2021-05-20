@@ -28,7 +28,7 @@
         android:visibility="gone"
         android:gravity="center"
         android:text="OS ENVIADA!"
-        android:textSize="@android:dimen/app_icon_size" />
+        android:textSize="16dp" />
 
     <Button
         android:id="@+id/btn_voltar"
@@ -157,8 +157,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-
-
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
@@ -181,6 +179,32 @@
                     android:gravity="right"
                     android:text=""
                     android:textSize="16dp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:focusable="false" />
+
+                <TextView
+                    android:id="@+id/tv_codfunc_descricao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Técnico: "
+                    android:inputType="number"
+                    android:textSize="24dp" />
+
+                <EditText
+                    android:id="@+id/et_codfunc"
+                    android:maxLines="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@color/colorTextBox"
+                    android:fontFamily="@font/roboto"
+                    android:hint="Insira sua matrícula..."
+                    android:inputType="number" />
 
                 <View
                     android:layout_width="fill_parent"
@@ -212,8 +236,7 @@
                         android:textSize="16dp" />
                     <Space
                         android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        />
+                        android:layout_height="wrap_content" />
 
 
                     <RadioButton
