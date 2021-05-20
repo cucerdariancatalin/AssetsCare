@@ -34,14 +34,13 @@ class RevisaoActivity : AppCompatActivity()
     var jsonobj = JSONObject()
     var tipo_os = ""
     var detalhes = ""
-
-
+    var codFunc = ""
     val urlPecas = "http://192.168.110.239:8080/api_manutencao/api/peca"
     val getOsUrl = "http://192.168.110.239:8080/api_manutencao/api/os"
     val postUrl = "http://192.168.110.239:8080/api_manutencao/api/pre_os"
     val postOsUrl = "http://192.168.110.239:8080/api_manutencao/api/gravaros"
 
-    lateinit var patrimonio: String
+    //lateinit var patrimonio: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -49,14 +48,12 @@ class RevisaoActivity : AppCompatActivity()
         setContentView(R.layout.activity_revisao)
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) //Somente retrato
 
-        var patrimonio = intent.getStringExtra("patrimonio")
+        val patrimonio = intent.getStringExtra("patrimonio")
         var localizacao = intent.getStringExtra("localizacao")
         var dataInicioOs = dateTimeFormat.format(date)
         number_picker?.minValue = 0
         number_picker?.maxValue = 30
-
         number_picker.wrapSelectorWheel = true
-
         number_picker.setOnValueChangedListener { _, _, newVal ->
 
             qtdPecasUtilizadas = newVal
@@ -91,7 +88,7 @@ class RevisaoActivity : AppCompatActivity()
                 R.id.rd_nao_atende -> pos_os = "nao_atende"
             }
 
-            val verifyEt = et_detalhes.text.toString()
+            var verifyEt = et_detalhes.text.toString()
             if (verifyEt.isEmpty()){
                 detalhes = "Sem detalhes"
             }else{
@@ -99,10 +96,11 @@ class RevisaoActivity : AppCompatActivity()
             }
 
             jsonobj.put("num_os", numOS)
+            jsonobj.put("num_patrimonio", patrimonio)
             jsonobj.put("tipo_os", tipo_os)
             jsonobj.put("cod_pecautilizada", pecaUtilizada)
+            jsonobj.put("codfuncmov", codFunc)
             jsonobj.put("detalhes", detalhes)
-            //jsonobj.put("detalhes", "tentativas ilimitadas")
             jsonobj.put("status_os", status_os)
             jsonobj.put("pos_os", pos_os)
             jsonobj.put("qtd_pecas_utilizadas", qtdPecasUtilizadas)
@@ -204,6 +202,7 @@ class RevisaoActivity : AppCompatActivity()
                 tv_num_os.text = numOS
                 jsonobjpreos.put("num_preos", numOS)
                 jsonobjpreos.put("num_patrimonio", tv_numero_patrimonio.text)
+                //jsonobjpreos.put("num_patrimonio", patrimonio)
                 jsonobjpreos.put("cliente", tv_loja.text)
 
                 postPreOs()
@@ -253,7 +252,7 @@ class RevisaoActivity : AppCompatActivity()
 
                 Toast.makeText(applicationContext, "OS enviada!", Toast.LENGTH_SHORT).show()
             },{
-                Toast.makeText(applicationContext, "OS enviada com alguns erros!", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, "OS enviada com alguns erros!", Toast.LENGTH_SHORT).show()
 
             })
         //req.tag = TAG

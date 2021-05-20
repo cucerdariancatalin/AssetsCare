@@ -30,6 +30,7 @@ class DadosActivity : AppCompatActivity() {
     lateinit var responsavelEquipamento: String
     lateinit var fabricante: String
     lateinit var custo: String
+    lateinit var nomeResponsavel: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -44,6 +45,7 @@ class DadosActivity : AppCompatActivity() {
         val req = JsonObjectRequest(Request.Method.GET, url, jsonobj,
             {
                     response ->
+                nomeResponsavel = response.getString("nome_responsavel")
                 descricaoEquipamento = response.getString("descricao")
                 codigoEquipamento = response.getString("codequip")
                 //dataInstalacaoS = response.getString("dtcadastro")
