@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AssetsCare</string>
     <string name="scanner_msg">Aponte a câmera para o QRCode</string>
-    <string name="btn_text">Escanear</string>
+    <string name="btn_text">LER QRCODE</string>
     <string name="btn_text2">Cancelar</string>
     <string name="btn_text_cancelar">cancelar</string>
     <string name="str_btn_revisao">Registrar Revisão</string>

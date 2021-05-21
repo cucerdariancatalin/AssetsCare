@@ -12,4 +12,6 @@
     <color name="colorTextBox">#FEFDDF</color>
     <color name="colorBlueLight">#733ae6</color>
     <color name="colorInativeField">#F7F7F7</color>
+    <color name="colorLightPurple">#F2E7FE</color>
+    <color name="colorLightBlack">#292929</color>
 </resources>

@@ -38,8 +38,6 @@
         android:visibility="invisible"
         android:textSize="16dp"/>
 
-
-
     <Button
         android:id="@+id/btn_scan"
         android:text="@string/btn_text"
@@ -52,6 +50,23 @@
         android:textSize="18dp"
         android:padding="8dp"
         android:background= "@drawable/btn_personal"
+        />
+
+    <EditText
+        android:id="@+id/et_qrcode"
+        android:maxLines="1"
+        android:gravity="center"
+        android:hint="Ou... entre com nº do patrimônio"
+        android:layout_marginHorizontal="64dp"
+        android:textColor="@color/colorLightBlack"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_height="wrap_content"
+        android:background= "@drawable/et_secondary"
+        android:textSize="18dp"
+        android:padding="8dp"
         />
 
     <Button
