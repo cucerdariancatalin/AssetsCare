@@ -21,4 +21,6 @@
     <string name="str_buscar"></string>
     <string name="btn_buscar_txt">buscar</string>
     <string name="et_qrcode_str">Digite o nº do patrimônio:</string>
+    <string name="tv_descricao_patrimonio">Num. Patrimônio: </string>
+    <string name="tv_descricao_tec">Técnico...</string>
 </resources>

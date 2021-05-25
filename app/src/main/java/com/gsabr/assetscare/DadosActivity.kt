@@ -28,9 +28,12 @@ class DadosActivity : AppCompatActivity() {
     lateinit var dataUltManutencaoS: String
     lateinit var codigoEquipamento: String
     lateinit var responsavelEquipamento: String
-    lateinit var fabricante: String
-    lateinit var custo: String
     lateinit var nomeResponsavel: String
+    lateinit var codEquip: String
+    lateinit var fabricante: String
+    lateinit var codFilial: String
+    lateinit var custo: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -48,22 +51,30 @@ class DadosActivity : AppCompatActivity() {
                 nomeResponsavel = response.getString("nome_responsavel")
                 descricaoEquipamento = response.getString("descricao")
                 codigoEquipamento = response.getString("codequip")
-                //dataInstalacaoS = response.getString("dtcadastro")
                 dataInstalacaoS = response.getString("dtcad")
                 dataUltManutencaoS = response.getString("dtrevisao")
                 responsavelEquipamento = response.getString("responsavel")
                 localizacaoEquipamento = response.getString("localizacao")
                 fabricante = response.getString("fabricante")
                 custo = response.getString("custo")
-
+                codEquip = response.getString("codequip")
+                codFilial = response.getString("codfilial")
 
                 tv_numero_patrimonio.text = if(patrimonio == null) dadoAusente else patrimonio
-                tv_descricao_equipamento.text = if(descricaoEquipamento == "null") dadoAusente else descricaoEquipamento.toUpperCase()
+                tv_descricao_equipamento.text = if(descricaoEquipamento == "null") dadoAusente else descricaoEquipamento.uppercase(
+                    Locale.getDefault()
+                )
                 tv_data_instalacao.text = if(dataInstalacaoS == "null") dadoAusente else dataInstalacaoS
                 tv_data_revisao.text = if(dataUltManutencaoS == "null") dadoAusente else dataUltManutencaoS
-                tv_responsavel.text = if(responsavelEquipamento == "null") dadoAusente else responsavelEquipamento.toUpperCase()
-                tv_localizacao.text = if(localizacaoEquipamento == "null") dadoAusente else localizacaoEquipamento.toUpperCase()
-                tv_fabricante.text = if(fabricante == "null") dadoAusente else fabricante.toUpperCase()
+                tv_responsavel.text = if(responsavelEquipamento == "null") dadoAusente else responsavelEquipamento.uppercase(
+                    Locale.getDefault()
+                )+ " - " + nomeResponsavel.uppercase(Locale.getDefault())
+                tv_localizacao.text = if(localizacaoEquipamento == "null") dadoAusente else localizacaoEquipamento.uppercase(
+                    Locale.getDefault()
+                )
+                tv_fabricante.text = if(fabricante == "null") dadoAusente else fabricante.uppercase(
+                    Locale.getDefault()
+                )
                 tv_custo.text = if(custo == "null") dadoAusente else "R$ " + custo
 
 
@@ -88,7 +99,10 @@ class DadosActivity : AppCompatActivity() {
 
             val detalhesDaRevisao = Intent(this@DadosActivity, RevisaoActivity::class.java)
             detalhesDaRevisao.putExtra("patrimonio", patrimonio)
-            detalhesDaRevisao.putExtra("localizacao", localizacaoEquipamento.toUpperCase())
+            detalhesDaRevisao.putExtra("codfilial", codFilial)
+            detalhesDaRevisao.putExtra("codequip", codEquip)
+            detalhesDaRevisao.putExtra("localizacao", localizacaoEquipamento.uppercase(Locale.getDefault())
+            )
             startActivity(detalhesDaRevisao)
         }
     }

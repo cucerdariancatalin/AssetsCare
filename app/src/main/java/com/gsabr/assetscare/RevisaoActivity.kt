@@ -49,7 +49,7 @@ class RevisaoActivity : AppCompatActivity()
     val getOsUrl = baseUrl + "os"
     val getNomeTecnicoUrl = baseUrl + "tecnico/"
     val postUrl = baseUrl + "pre_os"
-    val postOsUrl = baseUrl + "gravaros"
+    val putOsUrl = baseUrl + "gravar_os"
 
 
     //lateinit var patrimonio: String
@@ -61,7 +61,10 @@ class RevisaoActivity : AppCompatActivity()
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) //Somente retrato
 
         var patrimonio = intent.getStringExtra("patrimonio")
+        var codeEquipe = intent.getStringExtra("codequip")
         var localizacao = intent.getStringExtra("localizacao")
+        var codFilial = intent.getStringExtra("codfilial")
+        //detalhesDaRevisao.putExtra("codfilial", codFilial)
         var dataInicioOs = dateTimeFormat.format(date)
         number_picker?.minValue = 0
         number_picker?.maxValue = 30
@@ -81,19 +84,19 @@ class RevisaoActivity : AppCompatActivity()
         objectRequestPecas(urlPecas)
         getNumOs(getOsUrl)
         ///
-        var codfunc = et_codfunc.text.toString()
+
 
 
         ///...
-        tv_codfunc_descricao.text = nomeTecnico
+        //tv_codfunc_descricao.text = nomeTecnico
 
         btn_buscar_tecnico.setOnClickListener {
 
-            var codfunc = et_codfunc.text
+            codFunc = et_codfunc.text.toString()
 
             val queue = Volley.newRequestQueue(this)
             val request = JsonObjectRequest(
-                Request.Method.GET, getNomeTecnicoUrl + codfunc, null,
+                Request.Method.GET, getNomeTecnicoUrl + codFunc, null,
                 { response ->
 
                         nomeTecnico = response.get("nome").toString().uppercase(Locale.getDefault())
@@ -101,12 +104,15 @@ class RevisaoActivity : AppCompatActivity()
                         if (nomeTecnico == "NOTFOUND"){
 
                             tv_codfunc_descricao.text = msgNomeNaoEncontrado
-                            tv_codfunc_descricao.setTextColor(ContextCompat.getColor(this, R.color.colorRed50))
+                            tv_codfunc_descricao.setTextColor(ContextCompat.getColor(this, R.color.colorRed))
                         }else{
+
                             tv_codfunc_descricao.text = nomeTecnico
+                            tv_codfunc_descricao.setTextColor(ContextCompat.getColor(this, R.color.colorCyan))
+                            //tv_codfunc_descricao.setBackgroundColor(ContextCompat.getColor(this, R.color.colorLightGreen))
                         }
                 }
-            ) { error -> Toast.makeText(this, error.toString() + "UM ERRO OCORREU", Toast.LENGTH_SHORT).show() }
+            ) { error -> Toast.makeText(this, "Insira sua MATRÍCULA!!!", Toast.LENGTH_SHORT).show() }
             queue.add(request)
 
         }
@@ -141,9 +147,9 @@ class RevisaoActivity : AppCompatActivity()
                 detalhes = verifyEt
             }
 
-            codFunc = et_codfunc.text.toString()
 
             jsonobj.put("num_os", numOS)
+            jsonobj.put("codequip", codeEquipe)
             jsonobj.put("num_patrimonio", patrimonio)
             jsonobj.put("tipo_os", tipo_os)
             jsonobj.put("cod_pecautilizada", pecaUtilizada)
@@ -152,9 +158,10 @@ class RevisaoActivity : AppCompatActivity()
             jsonobj.put("status_os", status_os)
             jsonobj.put("pos_os", pos_os)
             jsonobj.put("qtd_pecas_utilizadas", qtdPecasUtilizadas)
+            jsonobj.put("codfilial", codFilial)
 
             //REQUEST
-            postOs()
+            putOs()
             //dados_titulo_revisao.text = jsonobj.toString()
             //Toast.makeText(applicationContext, "O resquest foi executado!", Toast.LENGTH_SHORT).show()
 
@@ -212,7 +219,7 @@ class RevisaoActivity : AppCompatActivity()
 
                 Toast.makeText(
                     applicationContext,
-                    "Conexão realizada com Sucesso!",
+                    "OS inicializada!",
                     Toast.LENGTH_SHORT
                 ).show()
             },
@@ -289,14 +296,14 @@ class RevisaoActivity : AppCompatActivity()
     //...
 
     //Atualizar OS
-    fun postOs(){
+    fun putOs(){
 
         isLoading(true)
         //val TAG = "MyTag"
         val que = Volley.newRequestQueue(this@RevisaoActivity)
         val req = JsonObjectRequest(
 
-            Request.Method.PUT, postOsUrl, jsonobj, {
+            Request.Method.PUT, putOsUrl, jsonobj, {
 
                 Toast.makeText(applicationContext, "OS enviada!", Toast.LENGTH_SHORT).show()
             },{
@@ -318,7 +325,7 @@ class RevisaoActivity : AppCompatActivity()
             Handler(Looper.getMainLooper()).postDelayed({
                 tb_main.visibility = View.VISIBLE
                 progress_bar.visibility = View.GONE
-            }, 2000)
+            }, 1000)
         }
     }
     //...
@@ -329,7 +336,7 @@ class RevisaoActivity : AppCompatActivity()
             iv_os_enviada.visibility = View.VISIBLE
             tv_os_enviada.visibility = View.VISIBLE
             btn_voltar.visibility = View.VISIBLE
-            tv_os_enviada.text= jsonobj.toString()
+            //tv_os_enviada.text= jsonobj.toString()
         }
     }
 }

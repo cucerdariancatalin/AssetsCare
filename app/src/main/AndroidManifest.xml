@@ -15,10 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".RevisaoActivity"></activity>
-        <activity
-            android:name=".UploadPhoto"
-            android:label="@string/title_activity_upload_photo"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".DadosActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

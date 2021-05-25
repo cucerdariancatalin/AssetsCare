@@ -34,7 +34,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:layout_height="96dp"
-        android:src="@drawable/img_qr_instruction"
+        android:src="@drawable/img_qr_instruction_b"
         android:visibility="gone"/>
 
     <Button
