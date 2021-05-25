@@ -3,15 +3,19 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorLight">#757565</color>
+    <color name="colorLight">#767780</color>
+    <color name="colorLightGrayB">#F1F1F1</color>
     <color name="colorGrayLight">#49493b</color>
     <color name="colorRed50">#FFEBEE</color>
     <color name="colorRed">#D32F2F</color>
-    <color name="colorLightBlue">#2BAFFA</color>
+    <color name="colorLightBlue">#E0F2F1</color>
     <color name="colorGsaBlue">#0E244B</color>
     <color name="colorTextBox">#FEFDDF</color>
     <color name="colorBlueLight">#733ae6</color>
     <color name="colorInativeField">#F7F7F7</color>
     <color name="colorLightPurple">#F2E7FE</color>
+    <color name="colorLightOcean">#8CABD4</color>
+    <color name="colorLightGray">#EFEFEF</color>
+    <color name="colorBackground">#FAFAFA</color>
     <color name="colorLightBlack">#292929</color>
-</resources>
+    </resources>

@@ -6,7 +6,7 @@
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/medium_corner"/>
-            <solid android:color="@color/design_default_color_background" />
+            <solid android:color="@color/colorLight" />
             <stroke android:width="3dp" android:color="@color/colorLight"/>
         </shape>
     </item>

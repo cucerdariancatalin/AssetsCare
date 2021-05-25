@@ -4,15 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import com.android.volley.Request
+import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.fasterxml.jackson.module.kotlin.*
 import kotlinx.android.synthetic.main.activity_dados.*
@@ -22,12 +24,15 @@ import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class RevisaoActivity : AppCompatActivity()
 {
     var date = Calendar.getInstance().time
     var dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
     var pecaUtilizada = ""
     var qtdPecasUtilizadas: Number? = null
+    private var requestQueue: RequestQueue? = null
+    var nomeTecnico: String = ""
     var numOS: String = ""
     var status_os = ""
     var pos_os = ""
@@ -36,10 +41,12 @@ class RevisaoActivity : AppCompatActivity()
     var tipo_os = ""
     var detalhes = ""
     var codFunc = ""
-    val urlPecas = "http://192.168.110.239:8080/api_manutencao/api/peca"
-    val getOsUrl = "http://192.168.110.239:8080/api_manutencao/api/os"
-    val postUrl = "http://192.168.110.239:8080/api_manutencao/api/pre_os"
-    val postOsUrl = "http://192.168.110.239:8080/api_manutencao/api/gravaros"
+    var baseUrl = "http://192.168.110.239:8080/api_manutencao/api/"
+    val urlPecas = baseUrl + "peca"
+    val getOsUrl = baseUrl + "os"
+    val getNomeTecnicoUrl = baseUrl + "tecnico/"
+    val postUrl = baseUrl + "pre_os"
+    val postOsUrl = baseUrl + "gravaros"
 
 
     //lateinit var patrimonio: String
@@ -70,6 +77,31 @@ class RevisaoActivity : AppCompatActivity()
 
         objectRequestPecas(urlPecas)
         getNumOs(getOsUrl)
+        ///
+        var codfunc = et_codfunc.text.toString()
+
+
+        ///...
+        tv_codfunc_descricao.text = nomeTecnico
+
+        btn_buscar_tecnico.setOnClickListener {
+
+            var codfunc = et_codfunc.text
+
+            val queue = Volley.newRequestQueue(this)
+            val request = StringRequest(
+                Request.Method.GET, getNomeTecnicoUrl + codfunc,
+                { response ->
+
+                    tv_codfunc_descricao.setText(response)
+                    Toast.makeText(this, response, Toast.LENGTH_LONG).show()
+                }
+            ) { error -> Log.d("error", error.toString()) }
+            queue.add(request)
+            //tv_codfunc_descricao.text = (getNomeTecnicoUrl + codfunc)
+        }
+
+        //...
 
         btn_enviar_os.setOnClickListener {
 
@@ -214,7 +246,7 @@ class RevisaoActivity : AppCompatActivity()
                 postPreOs()
                 Toast.makeText( applicationContext,"Conexão realizada, OS iniciada!", Toast.LENGTH_SHORT).show()
             },
-            { _ ->
+            {
                 Toast.makeText( applicationContext,"Erro ao obter número de OS!", Toast.LENGTH_SHORT).show()
             }
         )
@@ -227,7 +259,7 @@ class RevisaoActivity : AppCompatActivity()
     //Enviar pré ordem de serviço
     fun postPreOs(){
 
-        isLoading(true)
+        //isLoading(true)
 
         val que = Volley.newRequestQueue(this@RevisaoActivity)
         val TAG = "MyTag"

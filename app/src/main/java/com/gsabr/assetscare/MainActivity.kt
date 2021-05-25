@@ -35,10 +35,17 @@ class MainActivity : AppCompatActivity() {
         setupPermissions()
 
         //Acesso direto à activiy revisão (retirar depois)
-        val intent = Intent(this@MainActivity, DadosActivity::class.java)
-        intent.putExtra("patrimonio", "1")
-        startActivity(intent)
+        //val intent = Intent(this@MainActivity, DadosActivity::class.java)
+        //intent.putExtra("patrimonio", "1")
+        //startActivity(intent)
         //...
+
+        btn_buscar.setOnClickListener {
+            val it = et_qrcode.text.toString()
+            val intent = Intent(this@MainActivity, DadosActivity::class.java)
+            intent.putExtra("patrimonio", it)
+            startActivity(intent)
+        }
 
         btn_scan.setOnClickListener{
             iv_logo.visibility = View.GONE
@@ -46,6 +53,9 @@ class MainActivity : AppCompatActivity() {
             scanner_view.visibility = View.VISIBLE
             btn_scan.visibility = View.GONE
             btn_cancelar.visibility = View.VISIBLE
+            et_qrcode.visibility = View.GONE
+            btn_buscar.visibility = View.GONE
+            img_qr_instruction.visibility = View.VISIBLE
 
             btn_cancelar.setOnClickListener {
                 iv_logo.visibility = View.VISIBLE
@@ -53,6 +63,9 @@ class MainActivity : AppCompatActivity() {
                 scanner_view.visibility = View.GONE
                 btn_scan.visibility = View.VISIBLE
                 btn_cancelar.visibility = View.GONE
+                et_qrcode.visibility = View.VISIBLE
+                btn_buscar.visibility = View.VISIBLE
+                img_qr_instruction.visibility = View.GONE
             }
         }
         codeScanner()

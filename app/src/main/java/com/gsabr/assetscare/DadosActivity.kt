@@ -79,6 +79,11 @@ class DadosActivity : AppCompatActivity() {
             })
         que.add(req)
 
+        btn_voltar_main.setOnClickListener {
+            val intentMain = Intent(this@DadosActivity, MainActivity::class.java)
+            startActivity(intentMain)
+        }
+
         btn_registrar_revisao.setOnClickListener {
 
             val detalhesDaRevisao = Intent(this@DadosActivity, RevisaoActivity::class.java)

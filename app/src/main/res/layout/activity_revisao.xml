@@ -7,6 +7,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
+    android:background="@color/colorBackground"
     android:padding="48dp"
     tools:context=".RevisaoActivity">
 
@@ -193,18 +194,44 @@
                     android:fontFamily="@font/roboto"
                     android:text="Técnico: "
                     android:inputType="number"
-                    android:textSize="24dp" />
+                    android:textSize="8dp" />
 
-                <EditText
-                    android:id="@+id/et_codfunc"
-                    android:maxLines="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginHorizontal="8dp"
-                    android:background="@color/colorTextBox"
-                    android:fontFamily="@font/roboto"
-                    android:hint="Insira sua matrícula..."
-                    android:inputType="number" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp"
+                    >
+                    <ImageView
+                        android:background="@drawable/tecnico"
+
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"/>
+
+                    <EditText
+                        android:id="@+id/et_codfunc"
+                        android:maxLines="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLength="10"
+                        android:padding="12dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="8dp"
+                        android:background="@drawable/et_primary"
+                        android:fontFamily="@font/roboto"
+                        android:hint="Insira sua matrícula..."
+                        android:inputType="number" />
+
+                    <Button
+                        android:id="@+id/btn_buscar_tecnico"
+                        android:text="@string/btn_buscar_txt"
+                        android:textColor="@color/colorInativeField"
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/btn_personal"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
 
                 <View
                     android:layout_width="fill_parent"
@@ -308,11 +335,16 @@
 
                 <EditText
                     android:id="@+id/et_detalhes"
+                    android:maxLength="128"
+                    android:maxLines="1"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
-                    android:background="@color/colorTextBox"
+                    android:background="@drawable/et_primary"
                     android:fontFamily="@font/roboto"
+                    android:padding="12dp"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp"
                     android:hint="Descreva falhas..."
                     android:inputType="text" />
 
@@ -327,6 +359,7 @@
                     android:id="@+id/tv_concluida_titulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:fontFamily="@font/roboto"
                     android:text="O.S CONCLUÍDA?"
                     android:textSize="16dp" />

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="32dp"
+    android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
     <ImageView
@@ -26,17 +27,15 @@
         android:visibility="gone"
         app:maskColor="#3C000000"/>
 
-    <TextView
-        android:id="@+id/tv_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:gravity="center"
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/img_qr_instruction"
+        android:layout_width="96dp"
         android:layout_gravity="center"
-        android:fontFamily="@font/roboto"
-        android:text="@string/scanner_msg"
-        android:textAlignment="center"
-        android:visibility="invisible"
-        android:textSize="16dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_height="96dp"
+        android:src="@drawable/img_qr_instruction"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btn_scan"
@@ -52,22 +51,58 @@
         android:background= "@drawable/btn_personal"
         />
 
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto"
+        android:text="@string/scanner_msg"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        android:textSize="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:layout_marginHorizontal="64dp"
+        android:layout_height="wrap_content">
+
     <EditText
         android:id="@+id/et_qrcode"
         android:maxLines="1"
         android:gravity="center"
-        android:hint="Ou... entre com nº do patrimônio"
-        android:layout_marginHorizontal="64dp"
+        android:maxLength="20"
+        android:hint="@string/et_qrcode_str"
+        android:inputType="number"
         android:textColor="@color/colorLightBlack"
         android:layout_gravity="center"
         android:fontFamily="@font/roboto"
         android:layout_width="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_height="wrap_content"
         android:background= "@drawable/et_secondary"
         android:textSize="18dp"
-        android:padding="8dp"
+        android:padding="12dp"
+        android:visibility="visible"
+
         />
+
+    <Button
+        android:id="@+id/btn_buscar"
+        android:layout_width="wrap_content"
+        android:text="@string/btn_buscar_txt"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/roboto"
+        android:layout_marginLeft="8dp"
+        android:textSize="@dimen/fab_margin"
+        android:background="@drawable/btn_secondary"
+        android:visibility="visible"
+        android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_cancelar"
@@ -79,6 +114,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18dp"
+        android:layout_marginTop="8dp"
         android:visibility="invisible"
         android:padding="8dp"
         android:background="@drawable/btn_personal_red"/>
