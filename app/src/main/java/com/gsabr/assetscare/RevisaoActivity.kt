@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_revisao.tv_numero_patrimonio
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.system.exitProcess
 
 
 class RevisaoActivity : AppCompatActivity()
@@ -38,6 +40,7 @@ class RevisaoActivity : AppCompatActivity()
     var pos_os = ""
     var jsonobjpreos = JSONObject()
     var jsonobj = JSONObject()
+    var msgNomeNaoEncontrado = "MATRÍCULA INVÁLIDA"
     var tipo_os = ""
     var detalhes = ""
     var codFunc = ""
@@ -89,16 +92,23 @@ class RevisaoActivity : AppCompatActivity()
             var codfunc = et_codfunc.text
 
             val queue = Volley.newRequestQueue(this)
-            val request = StringRequest(
-                Request.Method.GET, getNomeTecnicoUrl + codfunc,
+            val request = JsonObjectRequest(
+                Request.Method.GET, getNomeTecnicoUrl + codfunc, null,
                 { response ->
 
-                    tv_codfunc_descricao.setText(response)
-                    Toast.makeText(this, response, Toast.LENGTH_LONG).show()
+                        nomeTecnico = response.get("nome").toString().uppercase(Locale.getDefault())
+
+                        if (nomeTecnico == "NOTFOUND"){
+
+                            tv_codfunc_descricao.text = msgNomeNaoEncontrado
+                            tv_codfunc_descricao.setTextColor(ContextCompat.getColor(this, R.color.colorRed50))
+                        }else{
+                            tv_codfunc_descricao.text = nomeTecnico
+                        }
                 }
-            ) { error -> Log.d("error", error.toString()) }
+            ) { error -> Toast.makeText(this, error.toString() + "UM ERRO OCORREU", Toast.LENGTH_SHORT).show() }
             queue.add(request)
-            //tv_codfunc_descricao.text = (getNomeTecnicoUrl + codfunc)
+
         }
 
         //...
