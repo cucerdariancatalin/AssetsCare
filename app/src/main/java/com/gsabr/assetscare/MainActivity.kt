@@ -55,30 +55,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_scan.setOnClickListener{
-            //iv_logo.visibility = View.GONE
-
-            run.changeView(arrayOf(iv_logo, btn_scan, et_qrcode, btn_buscar), Run.Visibility.GONE)
-            run.changeView(arrayOf(img_qr_instruction, btn_cancelar, scanner_view, tv_msg), Run.Visibility.VISIBLE)
-
             //btn_scan.visibility = View.GONE
-            //et_qrcode.visibility = View.GONE
-            //btn_buscar.visibility = View.GONE
-            //img_qr_instruction.visibility = View.VISIBLE
-            //btn_cancelar.visibility = View.VISIBLE
-            //scanner_view.visibility = View.VISIBLE
-            //tv_msg.visibility = View.VISIBLE
 
+            run.changeView(arrayOf(iv_logo, btn_scan, et_qrcode, btn_buscar), run.GONE)
+            run.changeView(arrayOf(img_qr_instruction, btn_cancelar, scanner_view, tv_msg), run.VISIBLE)
             btn_cancelar.setOnClickListener {
 
+                run.changeView(arrayOf(iv_logo, btn_scan, et_qrcode, btn_buscar), run.VISIBLE)
+                run.changeView(arrayOf(tv_msg), run.INVISIBLE)
+                run.changeView(arrayOf(scanner_view, btn_cancelar, img_qr_instruction, btn_gerenciar), run.GONE)
 
-                iv_logo.visibility = View.VISIBLE
-                tv_msg.visibility = View.INVISIBLE
-                scanner_view.visibility = View.GONE
-                btn_scan.visibility = View.VISIBLE
-                btn_cancelar.visibility = View.GONE
-                et_qrcode.visibility = View.VISIBLE
-                btn_buscar.visibility = View.VISIBLE
-                img_qr_instruction.visibility = View.GONE
             }
         }
         codeScanner()
@@ -159,14 +145,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-    //...
-
-    //Ocultar teclado
-    fun EditText.hideKeyboard(
-    ) {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as
-                InputMethodManager
-        imm.hideSoftInputFromWindow(this.windowToken, 0)
     }
 }

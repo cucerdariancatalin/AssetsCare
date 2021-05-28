@@ -4,20 +4,25 @@ import android.os.Looper
 import android.view.View
 
 
+
 class Run {
 
+    val VISIBLE = 0
+    val INVISIBLE = 4
+    val GONE = 8
 
-    enum class Visibility{
-        VISIBLE, INVISIBLE, GONE
-    }
+//    enum class Visibility{
+//        VISIBLE, INVISIBLE, GONE
+//    }
+
 
     // visible, gone, e invisible
-    fun changeView(views: Array<View>, value: Visibility){
+    fun changeView(views: Array<View>, visibility: Int){
 
-        when(value){
-            Visibility.GONE -> for(view in views){ view.visibility = View.GONE }
-            Visibility.INVISIBLE -> for(view in views){ view.visibility = View.INVISIBLE }
-            Visibility.VISIBLE -> for(view in views){ view.visibility = View.VISIBLE }
+        when(visibility){
+            GONE -> for(view in views){ view.visibility = GONE }
+            INVISIBLE -> for(view in views){ view.visibility = INVISIBLE }
+            VISIBLE -> for(view in views){ view.visibility = VISIBLE }
         }
     }
 
