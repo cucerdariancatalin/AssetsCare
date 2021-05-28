@@ -30,6 +30,7 @@ private const val CAMERA_REQUEST_CODE = 101
 class MainActivity : AppCompatActivity() {
 
     private lateinit var codeScanner: CodeScanner
+    private val run = Run()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,16 +55,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_scan.setOnClickListener{
-            iv_logo.visibility = View.GONE
-            tv_msg.visibility = View.VISIBLE
-            scanner_view.visibility = View.VISIBLE
-            btn_scan.visibility = View.GONE
-            btn_cancelar.visibility = View.VISIBLE
-            et_qrcode.visibility = View.GONE
-            btn_buscar.visibility = View.GONE
-            img_qr_instruction.visibility = View.VISIBLE
+            //iv_logo.visibility = View.GONE
+
+            run.changeView(arrayOf(iv_logo, btn_scan, et_qrcode, btn_buscar), Run.Visibility.GONE)
+            run.changeView(arrayOf(img_qr_instruction, btn_cancelar, scanner_view, tv_msg), Run.Visibility.VISIBLE)
+
+            //btn_scan.visibility = View.GONE
+            //et_qrcode.visibility = View.GONE
+            //btn_buscar.visibility = View.GONE
+            //img_qr_instruction.visibility = View.VISIBLE
+            //btn_cancelar.visibility = View.VISIBLE
+            //scanner_view.visibility = View.VISIBLE
+            //tv_msg.visibility = View.VISIBLE
 
             btn_cancelar.setOnClickListener {
+
+
                 iv_logo.visibility = View.VISIBLE
                 tv_msg.visibility = View.INVISIBLE
                 scanner_view.visibility = View.GONE
@@ -162,11 +169,4 @@ class MainActivity : AppCompatActivity() {
                 InputMethodManager
         imm.hideSoftInputFromWindow(this.windowToken, 0)
     }
-
-
-
-
-
-
-
 }

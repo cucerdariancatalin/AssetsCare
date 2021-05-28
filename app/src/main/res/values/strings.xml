@@ -23,4 +23,5 @@
     <string name="et_qrcode_str">Digite o nº do patrimônio:</string>
     <string name="tv_descricao_patrimonio">Num. Patrimônio: </string>
     <string name="tv_descricao_tec">Técnico...</string>
+    <string name="btn_text_gerenciar">Gerenciar OS\'s</string>
 </resources>

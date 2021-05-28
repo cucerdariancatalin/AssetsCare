@@ -51,6 +51,8 @@
         android:background= "@drawable/btn_personal"
         />
 
+
+
     <TextView
         android:id="@+id/tv_msg"
         android:layout_width="wrap_content"
@@ -67,7 +69,6 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:gravity="center"
-
         android:layout_marginHorizontal="64dp"
         android:layout_height="wrap_content">
 
@@ -95,8 +96,6 @@
 
 
     </LinearLayout>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -138,6 +137,21 @@
         android:layout_height="wrap_content"/>
 
     </LinearLayout>
+
+    <Button
+        android:layout_marginTop="24dp"
+        android:id="@+id/btn_gerenciar"
+        android:text="@string/btn_text_gerenciar"
+        android:layout_marginHorizontal="106dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_gravity="top"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:padding="8dp"
+        android:background= "@drawable/btn_optional"
+        />
 
     <Button
         android:id="@+id/btn_cancelar"

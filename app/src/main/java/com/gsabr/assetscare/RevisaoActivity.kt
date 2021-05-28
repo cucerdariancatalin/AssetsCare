@@ -2,7 +2,6 @@ package com.gsabr.assetscare
 
 import android.content.Context
 import android.content.Intent
-import android.icu.util.TimeUnit
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,7 +11,6 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.android.volley.Request
-import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -20,14 +18,9 @@ import com.fasterxml.jackson.module.kotlin.*
 import kotlinx.android.synthetic.main.activity_dados.*
 import kotlinx.android.synthetic.main.activity_revisao.*
 import kotlinx.android.synthetic.main.activity_revisao.tv_numero_patrimonio
-import kotlinx.coroutines.delay
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.concurrent.schedule
-import kotlin.system.exitProcess
-import kotlin.time.Duration
-
 
 class RevisaoActivity : AppCompatActivity()
 {
@@ -41,6 +34,7 @@ class RevisaoActivity : AppCompatActivity()
     private val dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
     private val date = Calendar.getInstance().time
     private val msgNomeNaoEncontrado = "MATRÍCULA INVÁLIDA"
+    private val run = Run()
 
     //Variáveis
     private var arrayListPecas = arrayListOf<String>("00; NENHUMA")
@@ -82,16 +76,10 @@ class RevisaoActivity : AppCompatActivity()
         tv_loja.text = localizacao
         tv_numero_patrimonio.text = patrimonio
 
-
         objectRequestPecas(urlPecas)
         getNumOs(getOsUrl)
-        ///
 
-
-
-        ///...
-        //tv_codfunc_descricao.text = nomeTecnico
-
+        //
         btn_buscar_tecnico.setOnClickListener {
 
             codFunc = et_codfunc.text.toString()
@@ -109,7 +97,7 @@ class RevisaoActivity : AppCompatActivity()
 
                             tv_codfunc_descricao.text = msgNomeNaoEncontrado
                             progress_bar_tecnico.visibility = View.VISIBLE
-                            hideViewDelay(tv_codfunc_descricao, 300)
+                            run.hideViewDelay(tv_codfunc_descricao, 300)
                             progress_bar_tecnico.visibility = View.INVISIBLE
                             tv_codfunc_descricao.setTextColor(ContextCompat.getColor(this, R.color.colorRed))
                         }else{
@@ -119,22 +107,19 @@ class RevisaoActivity : AppCompatActivity()
                             hideSoftKeyboard(et_codfunc)
                             et_codfunc.clearFocus()
                             isValidCodFunc = true
-
-                            //tv_codfunc_descricao.setBackgroundColor(ContextCompat.getColor(this, R.color.colorLightGreen))
                         }
                 }
-            ) { error -> Toast.makeText(this, "Insira sua MATRÍCULA!!!", Toast.LENGTH_SHORT).show() }
+            ) { Toast.makeText(this, "Insira sua MATRÍCULA!!!", Toast.LENGTH_SHORT).show() }
             queue.add(request)
-
         }
-
         //...
+
         btn_enviar_os.setOnClickListener {
 
             if(pecaUtilizada != "00" && (qtdPecasUtilizadas as Int) < 1){
                 Toast.makeText(this@RevisaoActivity, "A quantidade de peças parece incorreta, quantidade atual: ${qtdPecasUtilizadas}", Toast.LENGTH_SHORT).show()
 
-                hideViewDelay(btn_enviar_os, 2500)
+                run.hideViewDelay(btn_enviar_os, 2500)
 
                 return@setOnClickListener
             }
@@ -142,7 +127,7 @@ class RevisaoActivity : AppCompatActivity()
             if (pecaUtilizada == "00" && (qtdPecasUtilizadas as Int)> 0){
                 Toast.makeText(this@RevisaoActivity, "Nenhuma peça foi selecionada a quantidade deveria ser 0, Peça: NENHUMA, Qtd: ${qtdPecasUtilizadas}", Toast.LENGTH_SHORT).show()
 
-                hideViewDelay(btn_enviar_os, 2500)
+                run.hideViewDelay(btn_enviar_os, 2500)
 
                 return@setOnClickListener
             }
@@ -193,7 +178,7 @@ class RevisaoActivity : AppCompatActivity()
                 isFinal(true)
             }else{
                 Toast.makeText(this@RevisaoActivity, "Verifique sua MATRÍCULA e tente novamente!", Toast.LENGTH_SHORT).show()
-                hideViewDelay(btn_enviar_os, 2500)
+                run.hideViewDelay(btn_enviar_os, 2500)
             }
         }
 
@@ -364,12 +349,14 @@ class RevisaoActivity : AppCompatActivity()
         }
     }
 
-    fun hideViewDelay(view: View, duration: Long){
-        view.visibility = View.INVISIBLE
-        Handler(Looper.getMainLooper()).postDelayed({
-            view.visibility = View.VISIBLE
-        }, duration)
-    }
+
+
+//    fun hideViewDelay(view: View, duration: Long){
+//        view.visibility = View.INVISIBLE
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            view.visibility = View.VISIBLE
+//        }, duration)
+//    }
     override fun onResume() {
         super.onResume()
         Handler(Looper.getMainLooper()).postDelayed({

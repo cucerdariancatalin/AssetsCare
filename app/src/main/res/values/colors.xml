@@ -20,4 +20,5 @@
     <color name="colorBackground">#FAFAFA</color>
     <color name="colorLightBlack">#292929</color>
     <color name="colorCyan">#FF00ACC1</color>
+    <color name="Translucid">#00FFFFFF</color>
     </resources>
