@@ -34,14 +34,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) // Somente retrato
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) // Somente retrato
 
         setupPermissions()
 
         //Acesso direto à activity revisão (retirar depois)
-        val intent = Intent(this@MainActivity, DadosActivity::class.java)
-        intent.putExtra("patrimonio", "1")
-        startActivity(intent)
+//        val intent = Intent(this@MainActivity, DadosActivity::class.java)
+//        intent.putExtra("patrimonio", "1")
+//        startActivity(intent)
         //...
 
         btn_buscar.setOnClickListener {
