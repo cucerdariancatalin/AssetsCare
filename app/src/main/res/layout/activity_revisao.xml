@@ -9,9 +9,11 @@
     android:orientation="vertical"
     android:background="@color/colorBackground"
     android:padding="48dp"
+
     tools:context=".RevisaoActivity">
 
     <ImageView
+
         android:id="@+id/iv_os_enviada"
         android:layout_marginTop="240dp"
         android:layout_width="64dp"
@@ -28,7 +30,7 @@
         android:fontFamily="@font/roboto"
         android:visibility="gone"
         android:gravity="center"
-        android:text="OS ENVIADA!"
+
         android:textSize="22dp" />
 
     <Button
@@ -73,6 +75,7 @@
                 android:stretchColumns="1">
 
                 <ImageView
+
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_gravity="center"
@@ -316,6 +319,7 @@
                 <NumberPicker
                     android:id="@+id/number_picker"
                     android:layout_width="wrap_content"
+                    android:focusable="false"
                     android:layout_marginHorizontal="128dp"
                     android:layout_height="wrap_content"/>
                 <View

@@ -14,13 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RevisaoActivity"></activity>
+
+        <activity
+            android:name=".RevisaoActivity"
+            android:windowSoftInputMode="stateVisible">
+        </activity>
 
         <activity android:name=".DadosActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

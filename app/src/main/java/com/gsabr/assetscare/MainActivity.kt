@@ -1,5 +1,6 @@
 package com.gsabr.assetscare
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
@@ -7,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -16,9 +19,10 @@ import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_revisao.*
 import kotlin.system.exitProcess
-
 
 
 private const val CAMERA_REQUEST_CODE = 101
@@ -30,20 +34,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) // Somente retrato
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) // Somente retrato
 
         setupPermissions()
 
-        //Acesso direto à activiy revisão (retirar depois)
-        //val intent = Intent(this@MainActivity, DadosActivity::class.java)
-        //intent.putExtra("patrimonio", "1")
-        //startActivity(intent)
+        //Acesso direto à activity revisão (retirar depois)
+        val intent = Intent(this@MainActivity, DadosActivity::class.java)
+        intent.putExtra("patrimonio", "1")
+        startActivity(intent)
         //...
 
         btn_buscar.setOnClickListener {
             val it = et_qrcode.text.toString()
             val intent = Intent(this@MainActivity, DadosActivity::class.java)
             intent.putExtra("patrimonio", it)
+            //et_qrcode.hideKeyboard()
+            //et_codfunc.clearFocus()
             startActivity(intent)
         }
 
@@ -147,4 +153,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    //...
+
+    //Ocultar teclado
+    fun EditText.hideKeyboard(
+    ) {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as
+                InputMethodManager
+        imm.hideSoftInputFromWindow(this.windowToken, 0)
+    }
+
+
+
+
+
+
+
 }

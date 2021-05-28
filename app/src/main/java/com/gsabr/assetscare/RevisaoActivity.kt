@@ -1,21 +1,20 @@
 package com.gsabr.assetscare
 
+import android.content.Context
 import android.content.Intent
+import android.icu.util.TimeUnit
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.fasterxml.jackson.module.kotlin.*
 import kotlinx.android.synthetic.main.activity_dados.*
@@ -29,30 +28,31 @@ import kotlin.system.exitProcess
 
 class RevisaoActivity : AppCompatActivity()
 {
-    var date = Calendar.getInstance().time
-    var dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-    var pecaUtilizada = ""
-    var qtdPecasUtilizadas: Number? = null
-    private var requestQueue: RequestQueue? = null
-    var nomeTecnico: String = ""
-    var numOS: String = ""
-    var status_os = ""
-    var pos_os = ""
-    var jsonobjpreos = JSONObject()
-    var jsonobj = JSONObject()
-    var msgNomeNaoEncontrado = "MATRÍCULA INVÁLIDA"
-    var tipo_os = ""
-    var detalhes = ""
-    var codFunc = ""
-    var baseUrl = "http://192.168.110.239:8080/api_manutencao/api/"
-    val urlPecas = baseUrl + "peca"
-    val getOsUrl = baseUrl + "os"
-    val getNomeTecnicoUrl = baseUrl + "tecnico/"
-    val postUrl = baseUrl + "pre_os"
-    val putOsUrl = baseUrl + "gravar_os"
+    //Constantes
+    private val baseUrl = "http://192.168.110.239:8080/api_manutencao/api/"
+    private val urlPecas = baseUrl + "peca"
+    private val getOsUrl = baseUrl + "os"
+    private val getNomeTecnicoUrl = baseUrl + "tecnico/"
+    private val postUrl = baseUrl + "pre_os"
+    private val putOsUrl = baseUrl + "gravar_os"
+    private val dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+    private val date = Calendar.getInstance().time
+    private val msgNomeNaoEncontrado = "MATRÍCULA INVÁLIDA"
 
-
-    //lateinit var patrimonio: String
+    //Variáveis
+    private var arrayListPecas = arrayListOf<String>("00; NENHUMA")
+    private var jsonobjpreos = JSONObject()
+    private var jsonobj = JSONObject()
+    private var pecaUtilizada = ""
+    private var qtdPecasUtilizadas = 0
+    private var nomeTecnico = ""
+    private var numOS = ""
+    private var status_os = ""
+    private var pos_os = ""
+    private var tipo_os = ""
+    private var detalhes = ""
+    private var codFunc = ""
+    private var isValidCodFunc = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -74,7 +74,6 @@ class RevisaoActivity : AppCompatActivity()
             qtdPecasUtilizadas = newVal
             //Toast.makeText(this@RevisaoActivity, newVal.toString(), Toast.LENGTH_SHORT).show()
         }
-
 
         tv_data_os.text = dataInicioOs
         tv_loja.text = localizacao
@@ -103,12 +102,18 @@ class RevisaoActivity : AppCompatActivity()
 
                         if (nomeTecnico == "NOTFOUND"){
 
+                            isValidCodFunc = false
+
                             tv_codfunc_descricao.text = msgNomeNaoEncontrado
                             tv_codfunc_descricao.setTextColor(ContextCompat.getColor(this, R.color.colorRed))
                         }else{
 
                             tv_codfunc_descricao.text = nomeTecnico
                             tv_codfunc_descricao.setTextColor(ContextCompat.getColor(this, R.color.colorCyan))
+                            hideSoftKeyboard(et_codfunc)
+                            et_codfunc.clearFocus()
+                            isValidCodFunc = true
+
                             //tv_codfunc_descricao.setBackgroundColor(ContextCompat.getColor(this, R.color.colorLightGreen))
                         }
                 }
@@ -118,54 +123,65 @@ class RevisaoActivity : AppCompatActivity()
         }
 
         //...
-
         btn_enviar_os.setOnClickListener {
 
-            var id = rg_tipos_os.checkedRadioButtonId
-            when(id){
-                R.id.rd_descricao_tipo1 -> tipo_os = "P"
-                R.id.rd_descricao_tipo2 -> tipo_os = "C"
+            if(pecaUtilizada != "00" && (qtdPecasUtilizadas as Int) < 1){
+                Toast.makeText(this@RevisaoActivity, "A quantidade de peças parece incorreta, quantidade atual: ${qtdPecasUtilizadas}", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
-            id = rg_os_status.checkedRadioButtonId
-            when(id){
-                R.id.rd_conclusao_sim -> status_os = "F" //Aberta ou Pendente
-                R.id.rd_conclusao_nao -> status_os = "A" //Fechada
+            if (pecaUtilizada == "00" && (qtdPecasUtilizadas as Int)> 0){
+                Toast.makeText(this@RevisaoActivity, "Nenhuma peça foi selecionada a quantidade deveria ser 0, Peça: NENHUMA, Qtd: ${qtdPecasUtilizadas}", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
             }
 
-            id = rg_pos_os.checkedRadioButtonId
-            when(id){
-                R.id.rd_atende -> pos_os = "atende"
-                R.id.rd_atende_restrito -> pos_os = "restricao"
-                R.id.rd_nao_atende -> pos_os = "nao_atende"
-            }
+            if (isValidCodFunc) {
 
-            var verifyEt = et_detalhes.text.toString()
-            if (verifyEt.isEmpty()){
-                detalhes = "Sem detalhes"
+                var id = rg_tipos_os.checkedRadioButtonId
+                when (id) {
+                    R.id.rd_descricao_tipo1 -> tipo_os = "P"
+                    R.id.rd_descricao_tipo2 -> tipo_os = "C"
+                }
+
+                id = rg_os_status.checkedRadioButtonId
+                when (id) {
+                    R.id.rd_conclusao_sim -> status_os = "F" //Fechada
+                    R.id.rd_conclusao_nao -> status_os = "A" //Aberta ou Pendente
+                }
+
+                id = rg_pos_os.checkedRadioButtonId
+                when (id) {
+                    R.id.rd_atende -> pos_os = "atende"
+                    R.id.rd_atende_restrito -> pos_os = "restricao"
+                    R.id.rd_nao_atende -> pos_os = "nao_atende"
+                }
+
+                var verifyEt = et_detalhes.text.toString()
+                if (verifyEt.isEmpty()) {
+                    detalhes = "Sem detalhes"
+                } else {
+                    detalhes = verifyEt
+                }
+
+                jsonobj.put("num_os", numOS)
+                jsonobj.put("codequip", codeEquipe)
+                jsonobj.put("num_patrimonio", patrimonio)
+                jsonobj.put("tipo_os", tipo_os)
+                jsonobj.put("cod_pecautilizada", pecaUtilizada)
+                jsonobj.put("codfuncmov", codFunc)
+                jsonobj.put("detalhes", detalhes)
+                jsonobj.put("status_os", status_os)
+                jsonobj.put("pos_os", pos_os)
+                jsonobj.put("qtd_pecas_utilizadas", qtdPecasUtilizadas)
+                jsonobj.put("codfilial", codFilial)
+
+                //REQUEST
+                putOs()
+                //dados_titulo_revisao.text = jsonobj.toString()
+                //isFinal(true)
             }else{
-                detalhes = verifyEt
+                Toast.makeText(this@RevisaoActivity, "Verifique sua MATRÍCULA e tente novamente!", Toast.LENGTH_SHORT).show()
             }
-
-
-            jsonobj.put("num_os", numOS)
-            jsonobj.put("codequip", codeEquipe)
-            jsonobj.put("num_patrimonio", patrimonio)
-            jsonobj.put("tipo_os", tipo_os)
-            jsonobj.put("cod_pecautilizada", pecaUtilizada)
-            jsonobj.put("codfuncmov", codFunc)
-            jsonobj.put("detalhes", detalhes)
-            jsonobj.put("status_os", status_os)
-            jsonobj.put("pos_os", pos_os)
-            jsonobj.put("qtd_pecas_utilizadas", qtdPecasUtilizadas)
-            jsonobj.put("codfilial", codFilial)
-
-            //REQUEST
-            putOs()
-            //dados_titulo_revisao.text = jsonobj.toString()
-            //Toast.makeText(applicationContext, "O resquest foi executado!", Toast.LENGTH_SHORT).show()
-
-            isFinal(true)
         }
 
         btn_voltar.setOnClickListener {
@@ -185,20 +201,20 @@ class RevisaoActivity : AppCompatActivity()
             null,
             { response ->
 
-                var arrayListPecas = arrayListOf<String>()
-                arrayListPecas.add("00 ; NENHUMA")
+//                var arrayListPecas = arrayListOf<String>()
+                //arrayListPecas.add("00 ; NENHUMA")
                 for (i in 0..response.length() - 1) {
 
                     val pecaJsonObject = response.getJSONObject(i)
                     val codProd = pecaJsonObject.getString("codprod")
-                    val descricao = pecaJsonObject.getString("descricao").toUpperCase()
+                    val descricao = pecaJsonObject.getString("descricao")
+                        .uppercase(Locale.getDefault())
                     arrayListPecas.add("${codProd}; ${descricao}")
                 }
 
                 val searchmethod =
                     ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayListPecas)
                 searchmethod.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
                 spinnerPecasSearch.setTitle("Selecione a peça:")
                 spinnerPecasSearch.setPositiveButton("OK")
                 spinnerPecasSearch.adapter = searchmethod
@@ -210,30 +226,23 @@ class RevisaoActivity : AppCompatActivity()
                         ) {
                             pecaUtilizada = arrayListPecas[position].substringBefore(";")
                         }
-
                         override fun onNothingSelected(parent: AdapterView<*>) {
                             // TODO
                         }
                     }
-                //progress_bar_pecas.view
 
                 Toast.makeText(
                     applicationContext,
-                    "OS inicializada!",
+                    "Lista de peças carregada!",
                     Toast.LENGTH_SHORT
                 ).show()
             },
             {
-                Toast.makeText(
-                    applicationContext,
-                    "Erro, verifique o acesso à rede e tente novamente!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this , "Erro, verifique o acesso à rede e tente novamente!", Toast.LENGTH_SHORT).show()
             }
         )
-        queue.cache.clear()
         queue.add(jsonArrayRequest)
-
+        queue.cache.clear()
     }
     //...
 
@@ -261,7 +270,7 @@ class RevisaoActivity : AppCompatActivity()
                 jsonobjpreos.put("cliente", tv_loja.text)
 
                 postPreOs()
-                Toast.makeText( applicationContext,"Conexão realizada, OS iniciada!", Toast.LENGTH_SHORT).show()
+                Toast.makeText( applicationContext,"OS iniciada!", Toast.LENGTH_SHORT).show()
             },
             {
                 Toast.makeText( applicationContext,"Erro ao obter número de OS!", Toast.LENGTH_SHORT).show()
@@ -271,35 +280,20 @@ class RevisaoActivity : AppCompatActivity()
         que.add(jsonArrayRequest)
         isLoading(false)
     }
-    //...
 
-    //Enviar pré ordem de serviço
     fun postPreOs(){
-
-        //isLoading(true)
-
+        isLoading(true)
         val que = Volley.newRequestQueue(this@RevisaoActivity)
-        val TAG = "MyTag"
         val req = JsonObjectRequest(
-            Request.Method.POST, postUrl, jsonobjpreos,{
+            Request.Method.POST, postUrl, jsonobjpreos,{response->
 
-                Toast.makeText(applicationContext, "Pré ordem Enviada", Toast.LENGTH_SHORT).show()
-            }, {
-                //Toast.makeText(applicationContext, "...", Toast.LENGTH_SHORT).show()
-            })
-        req.tag = TAG
+            }, { })
+        que.add(req)
         que.cache.clear()
-        que?.add(req)
-
         isLoading(false)
     }
-    //...
 
-    //Atualizar OS
     fun putOs(){
-
-        isLoading(true)
-        //val TAG = "MyTag"
         val que = Volley.newRequestQueue(this@RevisaoActivity)
         val req = JsonObjectRequest(
 
@@ -310,10 +304,12 @@ class RevisaoActivity : AppCompatActivity()
                 //Toast.makeText(applicationContext, "OS enviada com alguns erros!", Toast.LENGTH_SHORT).show()
 
             })
-        //req.tag = TAG
+        que.add(req)
         que.cache.clear()
-        que?.add(req)
-        isLoading(false)
+    }
+
+    fun myWait(){
+        java.util.concurrent.TimeUnit.SECONDS.sleep(5);
     }
 
     //Tela de carregamento
@@ -336,7 +332,31 @@ class RevisaoActivity : AppCompatActivity()
             iv_os_enviada.visibility = View.VISIBLE
             tv_os_enviada.visibility = View.VISIBLE
             btn_voltar.visibility = View.VISIBLE
-            //tv_os_enviada.text= jsonobj.toString()
+            tv_os_enviada.text=  "OS ${numOS} ENVIADA!"
         }
     }
+
+     fun isValid(value: Boolean): Boolean {
+         return value
+    }
+
+    fun showSoftKeyboard(view: View) {
+
+        if (view.requestFocus()) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+
+    fun hideSoftKeyboard(view: View){
+        if(view.requestFocus()){
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
 }
+

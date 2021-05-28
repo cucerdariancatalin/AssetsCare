@@ -1,5 +1,9 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_a">8dp</dimen>
+    <dimen name="margin_b">16dp</dimen>
+    <dimen name="margin_c">32dp</dimen>
     <dimen name="medium_corner">15dp</dimen>
     <dimen name="max_corner">100dp</dimen>
+    <dimen name="line_size">140dp</dimen>
 </resources>
