@@ -44,16 +44,12 @@ class DadosActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dados)
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) // Deixar layout somente na modo retrato
 
-
-        var numPatrimonio = intent.getStringExtra("patrimonio")
-        var r = Run()
-
+        val numPatrimonio = intent.getStringExtra("patrimonio")
+        val r = Run()
 
         jsonobj.put("", numPatrimonio)
         val que: RequestQueue = Volley.newRequestQueue(this)
@@ -63,7 +59,6 @@ class DadosActivity : AppCompatActivity() {
 
                 p = Gson().fromJson(response.toString(), Patrimonio::class.java)
 
-                Toast.makeText(this, p.nome_responsavel, Toast.LENGTH_SHORT).show()
                 tv_descricao_equipamento.text = p.toString()
 
                 r.setViewText(arrayOf(
@@ -89,10 +84,6 @@ class DadosActivity : AppCompatActivity() {
                 Toast.makeText(this, p.dtcadastro, Toast.LENGTH_LONG).show()
                 //Toast.makeText(this, resp, Toast.LENGTH_SHORT).show()
 
-
-
-
-
             },{
                 sv_dados.visibility = View.INVISIBLE
                 iv_dados.visibility = View.GONE
@@ -101,60 +92,12 @@ class DadosActivity : AppCompatActivity() {
             })
         que.add(req)
 
-        //iv_dados.visibility = View.VISIBLE
-        //sv_dados.visibility = View.VISIBLE
-
-        //
-        //Toast.makeText(this@DadosActivity, p.toString(), Toast.LENGTH_LONG).show()
-
-
-        //(numPatrimonio ?: dadoAusente).also { tv_numero_patrimonio.text = it }
-          //tv_descricao_equipamento.text = "TESTE"
-
-        //Toast.makeText(this, p.nome_responsavel, Toast.LENGTH_SHORT).show()
-          //tv_data_instalacao.text = if(p.dtcadastro == "null") dadoAusente else p.dtcadastro
-//        tv_data_revisao.text = if(p.dataultmanutencao == "null") dadoAusente else p.dataultmanutencao
-//        tv_responsavel.text = p.responsavel.toString() + " - " + p.nome_responsavel.uppercase(Locale.getDefault())
-//        tv_localizacao.text = if(p.localizacao == "null") dadoAusente else p.localizacao.uppercase(Locale.getDefault())
-//        tv_fabricante.text = if(p.fabricante == "null") dadoAusente else p.fabricante.uppercase(Locale.getDefault())
-//        tv_custo.text = ("""R$ ${p.custo}""")
-
-
-//                nomeResponsavel = response.getString("nome_responsavel")
-//                descricaoEquipamento = response.getString("descricao")
-//                codigoEquipamento = response.getString("codequip")
-//                dataInstalacaoS = response.getString("dtcad")
-//                dataUltManutencaoS = response.getString("dtrevisao")
-//                responsavelEquipamento = response.getString("responsavel")
-//                localizacaoEquipamento = response.getString("localizacao")
-//                fabricante = response.getString("fabricante")
-//                custo = response.getString("custo")
-//                codEquip = response.getString("codequip")
-//                codFilial = response.getString("codfilial")
-//
-//
-//
-
-//
-//            }, {
-//                sv_dados.visibility = View.INVISIBLE
-//                iv_dados.visibility = View.GONE
-//                iv_erro_rede.visibility = View.VISIBLE
-//                tv_alerta_rede.visibility = View.VISIBLE
-//                Toast.makeText(this, "Erro ao conectar com o servidor!", Toast.LENGTH_SHORT).show()
-//            })
-//        que.add(req)
-
-
-//
         btn_voltar_main.setOnClickListener {
             val intentMain = Intent(this@DadosActivity, MainActivity::class.java)
             startActivity(intentMain)
         }
 //
         btn_registrar_revisao.setOnClickListener {
-
-
 
             val detalhesDaRevisao = Intent(this@DadosActivity, RevisaoActivity::class.java)
 
@@ -164,13 +107,6 @@ class DadosActivity : AppCompatActivity() {
             detalhesDaRevisao.putExtra("localizacao", p.localizacao.uppercase(Locale.getDefault()))
 
             startActivity(detalhesDaRevisao)
-
         }
-
-
-
-
     }
-
-
 }

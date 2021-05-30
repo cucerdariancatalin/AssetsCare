@@ -1,5 +1,6 @@
 package com.gsabr.assetscare
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -51,6 +52,7 @@ class RevisaoActivity : AppCompatActivity()
     private var codFunc = ""
     private var isValidCodFunc = false
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -129,14 +131,10 @@ class RevisaoActivity : AppCompatActivity()
 
         }
 
-        //...
-
-
-
         btn_enviar_os.setOnClickListener {
 
             if(pecaUtilizada != "00" && (qtdPecasUtilizadas as Int) < 1){
-                Toast.makeText(this@RevisaoActivity, "A quantidade de peças parece incorreta, quantidade atual: ${qtdPecasUtilizadas}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RevisaoActivity, "A quantidade de peças parece incorreta, quantidade atual: $qtdPecasUtilizadas", Toast.LENGTH_SHORT).show()
 
                 run.hideViewDelay(btn_enviar_os, 2500)
 
@@ -144,7 +142,7 @@ class RevisaoActivity : AppCompatActivity()
             }
 
             if (pecaUtilizada == "00" && (qtdPecasUtilizadas as Int)> 0){
-                Toast.makeText(this@RevisaoActivity, "Nenhuma peça foi selecionada a quantidade deveria ser 0, Peça: NENHUMA, Qtd: ${qtdPecasUtilizadas}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RevisaoActivity, "Nenhuma peça foi selecionada a quantidade deveria ser 0, Peça: NENHUMA, Qtd: $qtdPecasUtilizadas", Toast.LENGTH_SHORT).show()
 
                 run.hideViewDelay(btn_enviar_os, 2500)
 
@@ -172,11 +170,11 @@ class RevisaoActivity : AppCompatActivity()
                     R.id.rd_nao_atende -> pos_os = "nao_atende"
                 }
 
-                var verifyEt = et_detalhes.text.toString()
-                if (verifyEt.isEmpty()) {
-                    detalhes = "Sem detalhes"
+                val verifyEt = et_detalhes.text.toString()
+                detalhes = if (verifyEt.isEmpty()) {
+                    "Sem detalhes"
                 } else {
-                    detalhes = verifyEt
+                    verifyEt
                 }
 
                 jsonobj.put("num_os", numOS)
@@ -208,7 +206,7 @@ class RevisaoActivity : AppCompatActivity()
     }
 
     //Obtendo lista de peças
-    fun objectRequestPecas(url: String) {
+    private fun objectRequestPecas(url: String) {
 
         val queue = Volley.newRequestQueue(this@RevisaoActivity)
 
@@ -220,13 +218,13 @@ class RevisaoActivity : AppCompatActivity()
 
 //                var arrayListPecas = arrayListOf<String>()
                 //arrayListPecas.add("00 ; NENHUMA")
-                for (i in 0..response.length() - 1) {
+                for (i in 0 until response.length()) {
 
                     val pecaJsonObject = response.getJSONObject(i)
                     val codProd = pecaJsonObject.getString("codprod")
                     val descricao = pecaJsonObject.getString("descricao")
                         .uppercase(Locale.getDefault())
-                    arrayListPecas.add("${codProd}; ${descricao}")
+                    arrayListPecas.add("$codProd; $descricao")
                 }
 
                 val searchmethod =
@@ -264,7 +262,7 @@ class RevisaoActivity : AppCompatActivity()
     //...
 
     //Pegar num os
-    fun getNumOs(url: String){
+    private fun getNumOs(url: String){
 
         isLoading(true)
 
@@ -274,7 +272,7 @@ class RevisaoActivity : AppCompatActivity()
             { response ->
 
                 //var arrayListOs = arrayListOf<String>()
-                for (i in 0..response.length() - 1) {
+                for (i in 0 until response.length()) {
 
                     val osJsonObject = response.getJSONObject(i)
                     numOS = osJsonObject.getString("sequencia")
@@ -298,7 +296,7 @@ class RevisaoActivity : AppCompatActivity()
         isLoading(false)
     }
 
-    fun postPreOs(){
+    private fun postPreOs(){
         isLoading(true)
         val que = Volley.newRequestQueue(this@RevisaoActivity)
         val req = JsonObjectRequest(
@@ -310,7 +308,7 @@ class RevisaoActivity : AppCompatActivity()
         isLoading(false)
     }
 
-    fun putOs(){
+    private fun putOs(){
         val que = Volley.newRequestQueue(this@RevisaoActivity)
         val req = JsonObjectRequest(
 
@@ -326,7 +324,7 @@ class RevisaoActivity : AppCompatActivity()
     }
 
     //Tela de carregamento
-    fun isLoading(answer: Boolean){
+    private fun isLoading(answer: Boolean){
         if(answer){
             tb_main.visibility = View.GONE
             progress_bar.visibility = View.VISIBLE
@@ -339,13 +337,14 @@ class RevisaoActivity : AppCompatActivity()
     }
     //...
 
-    fun isFinal(answer: Boolean){
+    @SuppressLint("SetTextI18n")
+    private fun isFinal(answer: Boolean){
         if(answer){
             sv_dados_revisao.visibility = View.GONE
             iv_os_enviada.visibility = View.VISIBLE
             tv_os_enviada.visibility = View.VISIBLE
             btn_voltar.visibility = View.VISIBLE
-            tv_os_enviada.text=  "OS ${numOS} ENVIADA!"
+            tv_os_enviada.text=  "OS $numOS ENVIADA!"
         }
     }
 
@@ -353,7 +352,7 @@ class RevisaoActivity : AppCompatActivity()
          return value
     }
 
-    fun showSoftKeyboard(view: View) {
+    private fun showSoftKeyboard(view: View) {
 
         if (view.requestFocus()) {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -361,7 +360,7 @@ class RevisaoActivity : AppCompatActivity()
         }
     }
 
-    fun hideSoftKeyboard(view: View){
+    private fun hideSoftKeyboard(view: View){
         if(view.requestFocus()){
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
