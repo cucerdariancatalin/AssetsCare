@@ -1,16 +1,11 @@
 package com.gsabr.assetscare
 
-import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,11 +14,8 @@ import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_revisao.*
-import kotlin.system.exitProcess
-
 
 private const val CAMERA_REQUEST_CODE = 101
 
@@ -32,17 +24,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
     private val run = Run()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val viewGroupFirstScreen = arrayOf(iv_logo, btn_scan, et_qrcode, btn_buscar, btn_gerenciar, ll_ou)
+        val viewGroupSecondScreen = arrayOf(scanner_view, img_qr_instruction, btn_cancelar, scanner_view, tv_msg)
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) // Somente retrato
 
         setupPermissions()
 
         //Acesso direto à activity revisão (retirar depois)
-//        val intent = Intent(this@MainActivity, DadosActivity::class.java)
-//        intent.putExtra("patrimonio", "1")
-//        startActivity(intent)
+        val intent = Intent(this@MainActivity, DadosActivity::class.java)
+        intent.putExtra("patrimonio", "1")
+        startActivity(intent)
         //...
 
         btn_buscar.setOnClickListener {
@@ -56,18 +51,17 @@ class MainActivity : AppCompatActivity() {
 
         btn_scan.setOnClickListener{
             //btn_scan.visibility = View.GONE
-
-            run.changeView(arrayOf(iv_logo, btn_scan, et_qrcode, btn_buscar), run.GONE)
-            run.changeView(arrayOf(img_qr_instruction, btn_cancelar, scanner_view, tv_msg), run.VISIBLE)
-            btn_cancelar.setOnClickListener {
-
-                run.changeView(arrayOf(iv_logo, btn_scan, et_qrcode, btn_buscar), run.VISIBLE)
-                run.changeView(arrayOf(tv_msg), run.INVISIBLE)
-                run.changeView(arrayOf(scanner_view, btn_cancelar, img_qr_instruction, btn_gerenciar), run.GONE)
-
-            }
+            run.changeView(viewGroupFirstScreen, View.GONE)
+            run.changeView(viewGroupSecondScreen, View.VISIBLE)
         }
+
         codeScanner()
+
+        btn_cancelar.setOnClickListener {
+            run.changeView(viewGroupFirstScreen, View.VISIBLE)
+            run.changeView(arrayOf(tv_msg), View.INVISIBLE)
+            run.changeView(viewGroupSecondScreen, View.GONE)
+        }
     }
 
     private fun codeScanner(){

@@ -2,29 +2,21 @@ package com.gsabr.assetscare
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-
+import android.widget.TextView
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class Run {
 
-    val VISIBLE = 0
-    val INVISIBLE = 4
-    val GONE = 8
-
-//    enum class Visibility{
-//        VISIBLE, INVISIBLE, GONE
-//    }
-
-
-    // visible, gone, e invisible
     fun changeView(views: Array<View>, visibility: Int){
 
-        when(visibility){
-            GONE -> for(view in views){ view.visibility = GONE }
-            INVISIBLE -> for(view in views){ view.visibility = INVISIBLE }
-            VISIBLE -> for(view in views){ view.visibility = VISIBLE }
+        for(view in views){
+            view.visibility = visibility
+
         }
     }
+
 
     fun hideViewDelay(view: View, duration: Long){
         view.visibility = View.INVISIBLE
@@ -33,8 +25,27 @@ class Run {
         }, duration)
     }
 
-    fun retornaInt():Int{
-        return 1
+    var textViews = arrayOf("a", "b", "c")
+
+
+    var values = arrayOf(1, 2, 3)
+
+    var a = values[0]
+
+    fun setViewText(textViews: Array<TextView>, values: Array<String>){
+
+        for(textView in textViews){
+            textView.text = values[textViews.indexOf(textView)].uppercase(Locale.getDefault())
+        }
     }
+
+
+    fun formatDate(date: Calendar): String {
+        val formatter = "dd/MM/yyy"
+        val format = SimpleDateFormat(formatter)
+        return format.format(date.time)
+    }
+
+
 
 }

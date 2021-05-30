@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="000000"
+                android:text="@string/str_dado_nao_carregado"
                 android:id="@+id/tv_numero_patrimonio"
                 android:textSize="16dp"
                 android:gravity="right"
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:text="Coletor de Dados"
+        android:text="@string/str_dado_nao_carregado"
         android:id="@+id/tv_descricao_equipamento"
         android:textSize="16dp"
         android:gravity="right"
@@ -116,7 +116,7 @@
 
 
             <TextView
-                android:text="FABRICANTE"
+                android:text="Fabricante"
                 android:id="@+id/tv_fabricante_titulo"
                 android:textSize="24dp"
                 android:fontFamily="@font/roboto"
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="NÃO IDENTIFICADO"
+                android:text="@string/str_dado_nao_carregado"
                 android:id="@+id/tv_fabricante"
                 android:textSize="16dp"
                 android:gravity="right"
@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:text="16/11/2020"
+        android:text="@string/str_dado_nao_carregado"
         android:id="@+id/tv_data_instalacao"
         android:textSize="16dp"
         android:gravity="right"
@@ -170,7 +170,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:text="01/10/2020"
+        android:text="@string/str_dado_nao_carregado"
         android:id="@+id/tv_data_revisao"
         android:textSize="16dp"
         android:fontFamily="@font/roboto"
@@ -193,7 +193,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:text="Fulano de Tal"
+        android:text="@string/str_dado_nao_carregado"
         android:id="@+id/tv_responsavel"
         android:textSize="16dp"
         android:gravity="right"
@@ -216,7 +216,7 @@
 
 
             <TextView
-                android:text="LOJA 000"
+                android:text="@string/str_dado_nao_carregado"
                 android:id="@+id/tv_localizacao"
                 android:textSize="16dp"
                 android:gravity="right"
@@ -239,7 +239,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="R$ ............."
+                android:text="@string/str_dado_nao_carregado"
                 android:id="@+id/tv_custo"
                 android:textSize="16dp"
                 android:gravity="right"

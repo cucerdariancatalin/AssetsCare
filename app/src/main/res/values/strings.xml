@@ -24,4 +24,8 @@
     <string name="tv_descricao_patrimonio">Num. Patrimônio: </string>
     <string name="tv_descricao_tec">Técnico...</string>
     <string name="btn_text_gerenciar">Gerenciar OS\'s</string>
+    <string name="str_dado_nao_carregado">DADO NÃO CARREGADO</string>
+    <string name="str_tv_descricao_loja">Loja</string>
+    <string name="str_tv_num_os">Num. OS:</string>
+    <string name="str_inicio_manutencao">Início Manutenção:</string>
 </resources>

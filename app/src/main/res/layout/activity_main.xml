@@ -66,6 +66,7 @@
         android:textSize="16dp"/>
 
     <LinearLayout
+        android:id="@+id/ll_ou"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:gravity="center"
@@ -149,7 +150,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18dp"
-        android:visibility="visible"
         android:padding="8dp"
         android:background= "@drawable/btn_optional"
         />

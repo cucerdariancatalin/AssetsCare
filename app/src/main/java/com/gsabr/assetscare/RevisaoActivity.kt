@@ -82,6 +82,9 @@ class RevisaoActivity : AppCompatActivity()
         //
         btn_buscar_tecnico.setOnClickListener {
 
+            tv_codfunc_descricao.visibility = View.INVISIBLE
+            progress_bar_tecnico.visibility = View.VISIBLE
+
             codFunc = et_codfunc.text.toString()
 
             val queue = Volley.newRequestQueue(this)
@@ -89,30 +92,46 @@ class RevisaoActivity : AppCompatActivity()
                 Request.Method.GET, getNomeTecnicoUrl + codFunc, null,
                 { response ->
 
+
                         nomeTecnico = response.get("nome").toString().uppercase(Locale.getDefault())
 
                         if (nomeTecnico == "NOTFOUND"){
 
                             isValidCodFunc = false
-
+                            //run.hideViewDelay(tv_codfunc_descricao, 200)
                             tv_codfunc_descricao.text = msgNomeNaoEncontrado
-                            progress_bar_tecnico.visibility = View.VISIBLE
-                            run.hideViewDelay(tv_codfunc_descricao, 300)
-                            progress_bar_tecnico.visibility = View.INVISIBLE
                             tv_codfunc_descricao.setTextColor(ContextCompat.getColor(this, R.color.colorRed))
+                            progress_bar_tecnico.visibility = View.INVISIBLE
+                            tv_codfunc_descricao.visibility = View.VISIBLE
                         }else{
-
+                            //run.hideViewDelay(tv_codfunc_descricao, 200)
                             tv_codfunc_descricao.text = nomeTecnico
                             tv_codfunc_descricao.setTextColor(ContextCompat.getColor(this, R.color.colorCyan))
                             hideSoftKeyboard(et_codfunc)
                             et_codfunc.clearFocus()
                             isValidCodFunc = true
+                            progress_bar_tecnico.visibility = View.INVISIBLE
+                            tv_codfunc_descricao.visibility = View.VISIBLE
                         }
                 }
-            ) { Toast.makeText(this, "Insira sua MATRÍCULA!!!", Toast.LENGTH_SHORT).show() }
+            ) {
+                Toast.makeText(this, "Insira sua MATRÍCULA!!!", Toast.LENGTH_SHORT).show()
+                progress_bar_tecnico.visibility = View.INVISIBLE
+                tv_codfunc_descricao.visibility = View.VISIBLE
+                tv_codfunc_descricao.text = "PREENCHA O CAMPO COM SUA MATRÍCULA"
+                tv_codfunc_descricao.setTextColor(ContextCompat.getColor(this, R.color.colorRed))
+
+            }
             queue.add(request)
+
+            //run.hideViewDelay(tv_codfunc_descricao, 325)
+
+
         }
+
         //...
+
+
 
         btn_enviar_os.setOnClickListener {
 
