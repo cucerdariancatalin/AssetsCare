@@ -35,10 +35,16 @@ class MainActivity : AppCompatActivity() {
         setupPermissions()
 
         //Acesso direto à activity revisão (retirar depois)
-        val intent = Intent(this@MainActivity, DadosActivity::class.java)
-        intent.putExtra("patrimonio", "1")
-        startActivity(intent)
+//        val intent = Intent(this@MainActivity, DadosActivity::class.java)
+//        intent.putExtra("patrimonio", "1")
+//        startActivity(intent)
         //...
+
+
+        btn_gerenciar.setOnClickListener {
+            val intent = Intent(this@MainActivity, GerenciarOsActivity::class.java)
+            startActivity(intent)
+        }
 
         btn_buscar.setOnClickListener {
             val it = et_qrcode.text.toString()

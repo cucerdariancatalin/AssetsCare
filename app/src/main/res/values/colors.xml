@@ -17,8 +17,9 @@
     <color name="colorLightPurple">#F2E7FE</color>
     <color name="colorLightOcean">#8CABD4</color>
     <color name="colorLightGray">#EFEFEF</color>
-    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorBackground">#E8E8E8</color>
     <color name="colorLightBlack">#292929</color>
     <color name="colorCyan">#FF00ACC1</color>
     <color name="Translucid">#00FFFFFF</color>
+    <color name="colorSlateGray">#38464F</color>
     </resources>

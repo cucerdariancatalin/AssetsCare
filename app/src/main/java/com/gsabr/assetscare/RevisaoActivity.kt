@@ -94,7 +94,6 @@ class RevisaoActivity : AppCompatActivity()
                 Request.Method.GET, getNomeTecnicoUrl + codFunc, null,
                 { response ->
 
-
                         nomeTecnico = response.get("nome").toString().uppercase(Locale.getDefault())
 
                         if (nomeTecnico == "NOTFOUND"){
