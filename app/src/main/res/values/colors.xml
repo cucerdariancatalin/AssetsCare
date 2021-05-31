@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorText">#FF000000</color>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="colorLight">#767780</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#03DAC6</color>
+    <color name="colorLight">#90A4AE</color>
     <color name="colorLightGrayB">#F1F1F1</color>
     <color name="colorGrayLight">#49493b</color>
     <color name="colorRed50">#FFEBEE</color>
-    <color name="colorRed">#D32F2F</color>
+    <color name="colorRed">#B00020</color>
     <color name="colorLightBlue">#E0F2F1</color>
     <color name="colorGsaBlue">#0E244B</color>
     <color name="colorTextBox">#FEFDDF</color>
@@ -17,9 +17,9 @@
     <color name="colorLightPurple">#F2E7FE</color>
     <color name="colorLightOcean">#8CABD4</color>
     <color name="colorLightGray">#EFEFEF</color>
-    <color name="colorBackground">#E8E8E8</color>
-    <color name="colorLightBlack">#292929</color>
+    <color name="colorBackground">#FFFF</color>
+    <color name="colorLightBlack">#C5CAE9</color>
     <color name="colorCyan">#FF00ACC1</color>
     <color name="Translucid">#00FFFFFF</color>
-    <color name="colorSlateGray">#38464F</color>
+    <color name="colorSlateGray">#455A64</color>
     </resources>
