@@ -20,18 +20,13 @@ class GerenciarOsActivity : AppCompatActivity() {
 
     private lateinit var osRecyclerview: RecyclerView
     private lateinit var osArrayList: ArrayList<Order>
-    lateinit var num_os : Array<String>
-    lateinit var datafim : Array<String>
+
     lateinit var p: Order
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gerenciar_os)
-
-
-        num_os = arrayOf("1587", "1588")
-        datafim = arrayOf("16/03/2021 02:03", "16/03/2021 02:03")
 
         osRecyclerview = findViewById(R.id.recyclerView)
         osRecyclerview.layoutManager = LinearLayoutManager(this)
@@ -63,8 +58,6 @@ class GerenciarOsActivity : AppCompatActivity() {
                 for (i in 0 until response.length()) {
 
                     val orderJsonObject = response.getJSONObject(i)
-                    //val numos = orderJsonObject.getString("numos")
-                    //val data = orderJsonObject.getString("data")
                     p = Gson().fromJson(orderJsonObject.toString(), Order::class.java)
 
                     osArrayList.add(p)

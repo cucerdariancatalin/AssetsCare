@@ -9,7 +9,26 @@
     android:background="@color/colorBackground"
     tools:context=".DadosActivity">
 
+    <RelativeLayout
+        android:id="@+id/progress_bar_dados"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/colorPrimaryDark"/>
+    </RelativeLayout>
 
+
+    <LinearLayout
+        android:id="@+id/ll_main_dados"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_dados"
@@ -290,9 +309,5 @@
 
     </ScrollView>
 
-
-
-
-
-
+    </LinearLayout>
 </LinearLayout>

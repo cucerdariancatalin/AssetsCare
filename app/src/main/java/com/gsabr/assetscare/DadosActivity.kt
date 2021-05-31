@@ -3,6 +3,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import com.android.volley.Request
@@ -12,6 +14,8 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_dados.*
+import kotlinx.android.synthetic.main.activity_dados.tv_numero_patrimonio
+import kotlinx.android.synthetic.main.activity_revisao.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.json.JSONObject
@@ -23,23 +27,10 @@ import java.util.*
 class DadosActivity : AppCompatActivity() {
 
     var dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-
     val jsonobj = JSONObject()
     var dadoAusente = "DADO AUSENTE OU NÃO INFORMADO!"
 
-
-//    lateinit var descricaoEquipamento: String
-      lateinit var localizacaoEquipamento: String
-//    lateinit var dataInstalacaoS: String
-//    lateinit var dataUltManutencaoS: String
-//    lateinit var codigoEquipamento: String
-//    lateinit var responsavelEquipamento: String
-//    lateinit var nomeResponsavel: String
-      lateinit var codEquip: String
-//    lateinit var fabricante: String
-      lateinit var codFilial: String
-//    lateinit var custo: String
-      lateinit var p: Patrimonio
+    lateinit var p: Patrimonio
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +42,11 @@ class DadosActivity : AppCompatActivity() {
         val numPatrimonio = intent.getStringExtra("patrimonio")
         val r = Run()
 
+        r.isLoading(true, arrayOf(ll_main_dados), arrayOf(progress_bar_dados))
+
+        //            ll_main_dados.visibility = View.GONE
+//            progress_bar_dados.visibility = View.VISIBLE
+
         jsonobj.put("", numPatrimonio)
         val que: RequestQueue = Volley.newRequestQueue(this)
         val url = "http://192.168.110.239:8080/api_manutencao/api/equipamento/${numPatrimonio}"
@@ -60,6 +56,7 @@ class DadosActivity : AppCompatActivity() {
                 p = Gson().fromJson(response.toString(), Patrimonio::class.java)
 
                 tv_descricao_equipamento.text = p.toString()
+
 
                 r.setViewText(arrayOf(
                     tv_numero_patrimonio,
@@ -81,7 +78,7 @@ class DadosActivity : AppCompatActivity() {
                     "R$" + p.custo
                 ))
 
-                Toast.makeText(this, p.dtcadastro, Toast.LENGTH_LONG).show()
+
                 //Toast.makeText(this, resp, Toast.LENGTH_SHORT).show()
 
             },{
@@ -91,6 +88,7 @@ class DadosActivity : AppCompatActivity() {
                 Toast.makeText(this, "Erro ao conectar com o servidor!", Toast.LENGTH_SHORT).show()
             })
         que.add(req)
+        r.isLoading(false, arrayOf(ll_main_dados), arrayOf(progress_bar_dados))
 
         btn_voltar_main.setOnClickListener {
             val intentMain = Intent(this@DadosActivity, MainActivity::class.java)
@@ -109,4 +107,17 @@ class DadosActivity : AppCompatActivity() {
             startActivity(detalhesDaRevisao)
         }
     }
+
+//    private fun isLoading(answer: Boolean){
+//        if(answer){
+//            ll_main_dados.visibility = View.GONE
+//            progress_bar_dados.visibility = View.VISIBLE
+//        }else{
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                ll_main_dados.visibility = View.VISIBLE
+//                progress_bar_dados.visibility = View.GONE
+//            }, 1000)
+//        }
+//    }
+    //...
 }

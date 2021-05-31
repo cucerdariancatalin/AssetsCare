@@ -132,6 +132,8 @@ class RevisaoActivity : AppCompatActivity()
 
         btn_enviar_os.setOnClickListener {
 
+            hideSoftKeyboard(btn_enviar_os)
+
             if(pecaUtilizada != "00" && (qtdPecasUtilizadas as Int) < 1){
                 Toast.makeText(this@RevisaoActivity, "A quantidade de peças parece incorreta, quantidade atual: $qtdPecasUtilizadas", Toast.LENGTH_SHORT).show()
 
@@ -246,7 +248,7 @@ class RevisaoActivity : AppCompatActivity()
                     }
 
                 Toast.makeText(
-                    applicationContext,
+                    this@RevisaoActivity,
                     "Lista de peças carregada!",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -263,7 +265,7 @@ class RevisaoActivity : AppCompatActivity()
     //Pegar num os
     private fun getNumOs(url: String){
 
-        isLoading(true)
+        run.isLoading(true, arrayOf(tb_main), arrayOf(progress_bar))
 
         val que = Volley.newRequestQueue(this@RevisaoActivity)
         val jsonArrayRequest = JsonArrayRequest(
@@ -292,11 +294,11 @@ class RevisaoActivity : AppCompatActivity()
         )
         que.cache.clear()
         que.add(jsonArrayRequest)
-        isLoading(false)
+        run.isLoading(false, arrayOf(tb_main), arrayOf(progress_bar))
     }
 
     private fun postPreOs(){
-        isLoading(true)
+        //isLoading(true)
         val que = Volley.newRequestQueue(this@RevisaoActivity)
         val req = JsonObjectRequest(
             Request.Method.POST, postUrl, jsonobjpreos,{response->
@@ -304,7 +306,7 @@ class RevisaoActivity : AppCompatActivity()
             }, { })
         que.add(req)
         que.cache.clear()
-        isLoading(false)
+        //isLoading(false)
     }
 
     private fun putOs(){
@@ -323,26 +325,25 @@ class RevisaoActivity : AppCompatActivity()
     }
 
     //Tela de carregamento
-    private fun isLoading(answer: Boolean){
-        if(answer){
-            tb_main.visibility = View.GONE
-            progress_bar.visibility = View.VISIBLE
-        }else{
-            Handler(Looper.getMainLooper()).postDelayed({
-                tb_main.visibility = View.VISIBLE
-                progress_bar.visibility = View.GONE
-            }, 1000)
-        }
-    }
+//    private fun isLoading(answer: Boolean){
+//        if(answer){
+//            tb_main.visibility = View.GONE
+//            progress_bar.visibility = View.VISIBLE
+//        }else{
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                tb_main.visibility = View.VISIBLE
+//                progress_bar.visibility = View.GONE
+//            }, 1000)
+//        }
+//    }
     //...
 
     @SuppressLint("SetTextI18n")
     private fun isFinal(answer: Boolean){
         if(answer){
+
             sv_dados_revisao.visibility = View.GONE
-            iv_os_enviada.visibility = View.VISIBLE
-            tv_os_enviada.visibility = View.VISIBLE
-            btn_voltar.visibility = View.VISIBLE
+            rl_os_enviada.visibility = View.VISIBLE
             tv_os_enviada.text=  "OS $numOS ENVIADA!"
         }
     }

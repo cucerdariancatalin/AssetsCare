@@ -1,5 +1,4 @@
 package com.gsabr.assetscare
-
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -24,8 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
     private val run = Run()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val viewGroupFirstScreen = arrayOf(iv_logo, btn_scan, et_qrcode, btn_buscar, btn_gerenciar, ll_ou)
@@ -39,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 //        intent.putExtra("patrimonio", "1")
 //        startActivity(intent)
         //...
-
 
         btn_gerenciar.setOnClickListener {
             val intent = Intent(this@MainActivity, GerenciarOsActivity::class.java)
@@ -88,7 +86,6 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread {
 
                     //tv_msg.text = it.text
-
                     val intent = Intent(this@MainActivity, DadosActivity::class.java)
                     intent.putExtra("patrimonio", it.text)
                     startActivity(intent)
@@ -108,16 +105,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume(){
+
         super.onResume()
         codeScanner.startPreview()
     }
 
     override fun onPause() {
+
         codeScanner.releaseResources()
         super.onPause()
     }
 
     private fun setupPermissions(){
+
         val permission = ContextCompat.checkSelfPermission(this,
             android.Manifest.permission.CAMERA)
 
@@ -127,6 +127,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun makeRequest(){
+
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA),
         CAMERA_REQUEST_CODE)
     }
@@ -136,7 +137,9 @@ class MainActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode){
+
             CAMERA_REQUEST_CODE ->{
                 if(grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED){
                     Toast.makeText(this, "Você precisa de permissão de acesso a câmera para usar este aplicativo!", Toast.LENGTH_SHORT).show()
