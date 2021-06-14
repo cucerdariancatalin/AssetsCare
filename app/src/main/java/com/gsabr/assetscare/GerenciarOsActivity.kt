@@ -37,11 +37,6 @@ class GerenciarOsActivity : AppCompatActivity() {
         objectRequestOrders("http://192.168.110.239:8080/api_manutencao/api/listar_os")
     }
 
-
-
-
-
-
     //Obtendo lista de OS
     private fun objectRequestOrders(url: String) {
 

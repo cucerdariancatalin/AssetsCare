@@ -31,13 +31,14 @@ class MyAdapter(private val orderList : ArrayList<Order>) :
 
         //val a: String = "A"
         val colorGreen = "#4CAF50"
+        val colorRed = "#B00020"
         if(currentItem.status != null && currentItem.status.uppercase() == "A"){
 
             holder.status.text = "APROVADA"
             holder.status.setTextColor(Color.parseColor(colorGreen))
-
         }else{
             holder.status.text = "PENDENTE"
+            holder.status.setTextColor(Color.parseColor(colorRed))
         }
     }
 
@@ -54,6 +55,5 @@ class MyAdapter(private val orderList : ArrayList<Order>) :
         val codcli : TextView = itemView.findViewById(R.id.tv_codfilial_item)
         val posos: TextView = itemView.findViewById(R.id.tv_pos_item)
         val status: TextView = itemView.findViewById(R.id.tv_status_item)
-
     }
 }
