@@ -1,7 +1,7 @@
 # AssetsCare
 Controle de manutenção
 <div align="center">
-  <img src="assets/icon.png" width="150" />
+  <img src="icon.png" width="150" />
   <h1>AssetsCare</h1>
   <p> Assets Management and Maintenace</p>
   <p>
