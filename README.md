@@ -5,7 +5,7 @@ Controle de manutenção
   <h1>AssetsCare</h1>
   <p> Assets Management and Maintenace</p>
   <p>
-    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/rafaelkenedy/plantmanager?color=%232196F3">
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/rafaelkenedy/AssetsCare?color=%232196F3">
     <a href="https://www.linkedin.com/in/rafael-kenedy-da-silva-alves-692973160/" target="_blank" rel="noopener noreferrer">
       <img alt="Made by" src="https://img.shields.io/badge/made%20by-Rafael%20Kenedy-%232196F3">
     </a>             
