@@ -17,7 +17,7 @@ Controle de manutenção
 care your Assets!
 
 <div align="center">
-  <img src="assets/cover.png" width="700" /> 
+  <img src="cover.png" width="700" /> 
 </div>
 
 <br>
