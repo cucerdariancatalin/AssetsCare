@@ -3,7 +3,7 @@ Controle de manutenção
 <div align="center">
   <img src="icon.png" width="150" />
   <h1>AssetsCare</h1>
-  <p> Assets Management and Maintenace</p>
+  <p> Assets Management and Maintenance</p>
   <p>
     <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/rafaelkenedy/AssetsCare?color=%232196F3">
     <a href="https://www.linkedin.com/in/rafael-kenedy-da-silva-alves-692973160/" target="_blank" rel="noopener noreferrer">
@@ -27,6 +27,12 @@ care your Assets!
 # Technologies
 
   - Kotlin
+  - Volley
+  - JSON with GSON
+  - QR Code Scanner
+  - RecyclerView
+  - API consume
+
 
 ### Requirements
 
